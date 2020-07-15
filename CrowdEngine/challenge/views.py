@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Challenge, Category
 from django.views.generic import View
 from .forms import CategoryForm, ChallengeForm
-
+from .utils import ObjectDetailMixin
 
 def challenges_list(request):
     challenges = Challenge.objects.all()
@@ -14,24 +14,18 @@ def challenges_list(request):
 #     return render(request, 'challenge/challenge_detail.html', context={'challenge': challenge})
 # и тогда в urls обработчик challenge_detail
 
-class ChallengeDetail(View):
-    def get(self, request, slug):
-        #challenge = Challenge.objects.get(slug__iexact=slug)
-        challenge = get_object_or_404(Challenge, slug__iexact=slug)
-        return render(request, 'challenge/challenge_detail.html', context={'challenge': challenge})
-
+class ChallengeDetail(ObjectDetailMixin, View):
+    model = Challenge
+    template = 'challenge/challenge_detail.html'
 
 def categories_list(request):
     categories = Category.objects.all()
     return render(request, 'challenge/categories_list.html', context={'categories': categories})
 
 
-class CategoryDetail(View):
-    def get(self, request, slug):
-        category = get_object_or_404(Category, slug__iexact=slug)
-        return render(request, 'challenge/categories_detail.html', context={'category': category})
-
-
+class CategoryDetail(ObjectDetailMixin, View):
+    model = Category
+    template = 'challenge/categories_detail.html'
 class CategoryCreate(View):
     def get(self, request):
         form = CategoryForm()
