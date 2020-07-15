@@ -39,6 +39,13 @@ class Challenge(models.Model):
     def get_absolute_url(self):
         return reverse('challenge_detail_url', kwargs={'slug': self.slug})
 
+
+    def get_update_url(self):
+        return reverse('challenge_update_url', kwargs={'slug':self.slug})
+
+    def get_delete_url(self):
+        return reverse('challenge_delete_url', kwargs={'slug': self.slug})
+
 class Category(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50, unique=True)
@@ -50,3 +57,8 @@ class Category(models.Model):
         return reverse('category_detail_url', kwargs={'slug': self.slug})
 
 
+    def get_update_url(self):
+        return reverse('category_update_url', kwargs={'slug': self.slug})
+
+    def get_delete_url(self):
+        return reverse('category_delete_url', kwargs={'slug': self.slug})
