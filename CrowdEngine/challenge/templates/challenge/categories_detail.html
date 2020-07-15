@@ -1,0 +1,20 @@
+{% extends 'challenge/base_challenge.html' %}
+
+{% block title %}
+ {{ category.title }} - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+ <h1 class="mt-3">
+     Проблемы по теме {{ category.title|title }}:
+ </h1>
+<p>
+    {% for challenge in category.challenges.all %}
+    {% include 'challenge/includes/challenge_card_template.html' %}
+    {% endfor %}
+</p>
+{% endblock %}
+
+
+

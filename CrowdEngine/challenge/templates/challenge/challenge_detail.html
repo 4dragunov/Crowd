@@ -1,0 +1,20 @@
+{% extends 'challenge/base_challenge.html' %}
+
+{% block title %}
+ {{ challenge.title }} - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+ <h1 class="mt-5">
+     {{ challenge.title }}
+ </h1>
+<p>
+    {{challenge.body}}
+</p>
+<div class="card-footer text-muted">
+      {% for category in challenge.categories.all %}
+         Категория:<a href="{{ category.get_absolute_url }}"> {{ category.title }}</a>
+         {% endfor %}
+     </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'challenge/base_challenge.html' %}
+
+
+{% block title %}
+<h1>Challenges list</h1>
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-5">
+    Нерешенные проблемы:
+</h1>
+
+
+{% for challenge in challenges %}
+{% include 'challenge/includes/challenge_card_template.html' %}
+{% endfor %}
+{% endblock %}

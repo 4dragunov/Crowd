@@ -1,0 +1,17 @@
+{% extends 'challenge/base_challenge.html' %}
+
+{% block title %}
+    Список категорий проблем -  - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4"> Категории:
+    {% for category in categories %}
+        <h3>
+            <a href="{{ category.get_absolute_url }}">
+                {{category.title}}
+            </a>
+        </h3>
+    {% endfor%}
+</h1>
+{% endblock %}
