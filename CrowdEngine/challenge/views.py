@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Challenge, Category
 from django.views.generic import View
 from .forms import CategoryForm, ChallengeForm
@@ -9,9 +9,16 @@ def challenges_list(request):
     return render(request, 'challenge/index.html', context={'challenges': challenges})
 
 
-def challenge_detail(request, slug):
-    challenge = Challenge.objects.get(slug__iexact=slug)
-    return render(request, 'challenge/challenge_detail.html', context={'challenge': challenge})
+# def challenge_detail(request, slug):
+#     challenge = Challenge.objects.get(slug__iexact=slug)
+#     return render(request, 'challenge/challenge_detail.html', context={'challenge': challenge})
+# и тогда в urls обработчик challenge_detail
+
+class ChallengeDetail(View):
+    def get(self, request, slug):
+        #challenge = Challenge.objects.get(slug__iexact=slug)
+        challenge = get_object_or_404(Challenge, slug__iexact=slug)
+        return render(request, 'challenge/challenge_detail.html', context={'challenge': challenge})
 
 
 def categories_list(request):
@@ -19,9 +26,10 @@ def categories_list(request):
     return render(request, 'challenge/categories_list.html', context={'categories': categories})
 
 
-def category_detail(request, slug):
-    category = Category.objects.get(slug__iexact=slug)
-    return render(request, 'challenge/categories_detail.html', context={'category': category})
+class CategoryDetail(View):
+    def get(self, request, slug):
+        category = get_object_or_404(Category, slug__iexact=slug)
+        return render(request, 'challenge/categories_detail.html', context={'category': category})
 
 
 class CategoryCreate(View):
