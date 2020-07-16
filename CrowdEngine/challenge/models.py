@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 
 from time import time
+from datetime import datetime
 
 
 
@@ -20,8 +21,10 @@ class Challenge(models.Model):
     title = models.CharField(max_length=150, db_index=True)
     slug = models.SlugField(max_length=150, blank=True, unique=True)
     body = models.TextField(blank=True, db_index=True)
-    date_pub = models.DateTimeField(auto_now_add=True)
-    categories = models.ManyToManyField('Category', blank=True, related_name='challenges')
+    date_pub = models.DateField(auto_now_add=True)
+    date_remaining = models.DateField(auto_now_add=False, blank=True, null=True)
+    prize = models.CharField(max_length=20, default=10)
+    categories = models.ManyToManyField('Category', related_name='challenges')
     # tags = models.ManyToManyField('Tag', blank=True, related_name='posts')
 
     def __str__(self):

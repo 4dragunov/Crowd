@@ -11,7 +11,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <title>
         {% block title %}
-            Title ST
+            CrowdOpinion.ru
         {% endblock %}
     </title>
 </head>
@@ -25,16 +25,19 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
+        <a class="nav-link" href=" {% url 'main_url' %}">Главная</a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link" href=" {% url 'challenges_list_url' %}">Обзор проблем</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="{% url 'categories_list_url' %}">Категории проблем</a>
-      </li>c
+      </li>
 
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
     </form>
   </div>
 </nav>
@@ -48,11 +51,15 @@
         </div>
     </div>
 
+    {% if request.user.is_authenticated and request.user.is_staff%}
+
     <div class="admin-panel" align-items-center>
         <a href="/admin" class="btn btn-outline-info">Admin</a>
         {% block admin-panel %}
         {% endblock %}
     </div>
+
+    {% endif %}
 
 </body>
 </html>

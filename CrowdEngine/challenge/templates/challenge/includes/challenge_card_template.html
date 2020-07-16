@@ -1,17 +1,35 @@
  <div class="card  mb-5">
   <div class="card-header text-white bg-primary">
-      {{ challenge.date_pub }}
+      {{ challenge.title }}
   </div>
   <div class="card-body">
     <h5 class="card-title">{{ challenge.titile }}</h5>
-    <p class="card-text">{{ challenge.body|truncatewords:15 }}</p>
+
+    <p class="card-text">{{ challenge.body|truncatewords:45 }}</p>
     <a href="{{ challenge.get_absolute_url }}" class="btn btn-primary">Подробнее </a>
 
   </div>
+
     <div class="card-footer text-muted">
       {% for category in challenge.categories.all %}
          Категория:<a href="{{ category.get_absolute_url }}"> {{ category.title }}</a>
+
          {% endfor %}
+     </div>
+     <div class="card-footer text-muted">
+          Дата создания: {{ challenge.date_pub }}
+
+
+     </div>
+     <div class="card-footer text-muted">
+         Дата завершения: {{ challenge.date_remaining }}
+
+
+     </div>
+
+     <div class="card-footer text-muted">
+          Призовой фонд: {{ challenge.prize }} рублей
+
      </div>
 </div>
 

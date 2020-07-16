@@ -4,11 +4,11 @@ from django.views.generic import View
 from .forms import CategoryForm, ChallengeForm
 from .utils import ObjectDetailMixin, ObjectUpdateMixin, ObjectDeleteMixin
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def challenges_list(request):
     challenges = Challenge.objects.all()
     return render(request, 'challenge/index.html', context={'challenges': challenges})
-
 
 # def challenge_detail(request, slug):
 #     challenge = Challenge.objects.get(slug__iexact=slug)
@@ -23,10 +23,10 @@ def categories_list(request):
     categories = Category.objects.all()
     return render(request, 'challenge/categories_list.html', context={'categories': categories})
 
-
 class CategoryDetail(ObjectDetailMixin, View):
     model = Category
     template = 'challenge/categories_detail.html'
+
 class CategoryCreate(View):
     def get(self, request):
         form = CategoryForm()
@@ -64,8 +64,6 @@ class CategoryUpdate(ObjectUpdateMixin, View):
     model = Category
     model_form = CategoryForm
     template = 'challenge/category_update_form.html'
-
-
 
 class CategoryDelete(ObjectDeleteMixin, View):
 

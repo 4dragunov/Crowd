@@ -1,6 +1,8 @@
 from django import forms
 from .models import Category, Challenge
 from django.core.exceptions import ValidationError
+from time import time
+
 
 class CategoryForm(forms.ModelForm):
     # title = forms.CharField(max_length=50)
@@ -40,13 +42,15 @@ class ChallengeForm(forms.ModelForm):
 
     class Meta:
         model = Challenge
-        fields = ['title', 'slug', 'body', 'categories' ]
+        fields = ['title', 'slug', 'body', 'categories', 'prize', 'date_remaining']
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'slug': forms.TextInput(attrs={'class': 'form-control'}),
             'body' : forms.Textarea(attrs={'class': 'form-control'}),
             'categories': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'prize': forms.TextInput(attrs={'class': 'form-control'}),
+            'date_remaining': forms.SelectDateWidget(attrs={'class': 'form-control'}),
         }
 
     def clean_slug(self):
