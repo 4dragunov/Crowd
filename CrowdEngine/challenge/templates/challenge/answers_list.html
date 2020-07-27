@@ -1,0 +1,15 @@
+{% extends 'challenge/base_challenge.html' %}
+
+{% block title %}
+ {{ answer.title }} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-3 mb-5">
+        Ответы по проблеме: {{ answers.0.challenge.title }}
+    </h1>
+    {% for answer in answers %}
+    {% include 'challenge/includes/answer_card_template.html' %}
+    {% endfor %}
+
+{% endblock %}

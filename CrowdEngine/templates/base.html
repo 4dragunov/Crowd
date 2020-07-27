@@ -34,6 +34,30 @@
         <a class="nav-link" href="{% url 'categories_list_url' %}">Категории проблем</a>
       </li>
 
+
+      {% if user.is_authenticated %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ user.username }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'password_change' %}">Изменить пароль</a>
+          <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      {% endif %}
+
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'login' %}">Войти</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'signup' %}">Регистрация</a>
+      </li>
+
+
+
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
@@ -50,16 +74,11 @@
             </div>
         </div>
     </div>
-
-    {% if request.user.is_authenticated and request.user.is_staff%}
-
-    <div class="admin-panel" align-items-center>
+ <div class="admin-panel" align-items-center>
         <a href="/admin" class="btn btn-outline-info">Admin</a>
         {% block admin-panel %}
         {% endblock %}
     </div>
-
-    {% endif %}
 
 </body>
 </html>

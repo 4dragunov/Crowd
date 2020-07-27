@@ -11,6 +11,8 @@
  </h1>
 <p>
     {{challenge.body}}
+     <a href="{{ challenge.answers.all.0.get_absolute_url }}" class="btn btn-primary">Ответы </a>
+
 </p>
 <div class="card-footer text-muted">
       {% for category in challenge.categories.all %}

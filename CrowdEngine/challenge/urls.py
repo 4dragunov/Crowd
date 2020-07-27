@@ -13,6 +13,7 @@ urlpatterns = [
     path('category/<str:slug>/update/', CategoryUpdate.as_view(), name='category_update_url'),
     path('category/<str:slug>/', CategoryDetail.as_view(), name='category_detail_url'),
     path('category/<str:slug>/delete/', CategoryDelete.as_view(), name='category_delete_url'),
+    path('challenge/<str:slug>/answers', answers_list, name='answers_list_url'),
 
 
 ]

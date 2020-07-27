@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Challenge, Category
+from .models import Challenge, Category, Answer
 
 
 class ChallengeAdmin(admin.ModelAdmin):
@@ -12,10 +12,14 @@ class ChallengeAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("title", "slug", "challenges")
+    list_display = ("title", "challenges")
     #search_fields = ("title",)
     #list_filter = ("title",)
     empty_value_display = "-пусто-"
+
+@admin.register(Answer)
+class AnswerAdmin(admin.ModelAdmin):
+    list_display = ('title', 'challenge', 'slug')
 
 
 admin.site.register(Challenge, ChallengeAdmin)

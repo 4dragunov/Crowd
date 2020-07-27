@@ -5,11 +5,7 @@ from time import time
 
 
 class CategoryForm(forms.ModelForm):
-    # title = forms.CharField(max_length=50)
-    # slug = forms.CharField(max_length=50)
-    #
-    # title.widget.attrs.update({'class' : 'form-control'})
-    # slug.widget.attrs.update({'class': 'form-control'})
+
     class Meta:
         model = Category
         fields = ['title', 'slug']    #'__all__'
@@ -60,3 +56,8 @@ class ChallengeForm(forms.ModelForm):
             raise ValidationError('Адрес не может быть "Create"')
 
         return new_slug
+
+
+
+   
+

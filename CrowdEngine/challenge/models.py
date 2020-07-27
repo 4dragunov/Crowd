@@ -1,5 +1,5 @@
 from django.db import models
-from django.shortcuts import reverse
+from django.shortcuts import reverse, redirect
 
 from django.contrib.auth import get_user_model
 
@@ -25,29 +25,37 @@ class Challenge(models.Model):
     date_remaining = models.DateField(auto_now_add=False, blank=True, null=True)
     prize = models.CharField(max_length=20, default=10)
     categories = models.ManyToManyField('Category', related_name='challenges')
-    # tags = models.ManyToManyField('Tag', blank=True, related_name='posts')
 
     def __str__(self):
         return self.title
-
-
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = gen_slug(self.title)
         super().save(*args, **kwargs)
 
-
-
     def get_absolute_url(self):
         return reverse('challenge_detail_url', kwargs={'slug': self.slug})
-
 
     def get_update_url(self):
         return reverse('challenge_update_url', kwargs={'slug':self.slug})
 
     def get_delete_url(self):
         return reverse('challenge_delete_url', kwargs={'slug': self.slug})
+
+class Answer(models.Model):
+    challenge = models.ForeignKey(Challenge, on_delete=models.SET_NULL, related_name='answers', null=True)
+    title = models.CharField(max_length=150, db_index=True)
+    slug = models.ForeignKey(Challenge, on_delete=models.SET_NULL, related_name='challenge_slug', null=True)
+    body = models.TextField(blank=True)
+    date_pub = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('answers_list_url', kwargs={'slug': self.slug})
+
 
 class Category(models.Model):
     title = models.CharField(max_length=50)

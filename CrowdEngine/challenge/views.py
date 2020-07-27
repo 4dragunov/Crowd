@@ -1,10 +1,20 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Challenge, Category
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from .models import Challenge, Category, Answer
 from django.views.generic import View
 from .forms import CategoryForm, ChallengeForm
 from .utils import ObjectDetailMixin, ObjectUpdateMixin, ObjectDeleteMixin
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+def answers_list(request, slug):
+    answers = Answer.objects.filter(slug__slug=slug)
+    #return HttpResponse('Hello')
+    return render(request, 'challenge/answers_list.html', context={'answers': answers})
+
+# def answers_count(slug):
+#     answers_count() = Answer.objects.filter(slug__slug=slug).count()
+#     return answers_count
 
 def challenges_list(request):
     challenges = Challenge.objects.all()

@@ -8,13 +8,14 @@
     <p class="card-text">{{ challenge.body|truncatewords:45 }}</p>
     <a href="{{ challenge.get_absolute_url }}" class="btn btn-primary">Подробнее </a>
 
+
+
   </div>
 
     <div class="card-footer text-muted">
       {% for category in challenge.categories.all %}
          Категория:<a href="{{ category.get_absolute_url }}"> {{ category.title }}</a>
-
-         {% endfor %}
+      {% endfor %}
      </div>
      <div class="card-footer text-muted">
           Дата создания: {{ challenge.date_pub }}
@@ -29,6 +30,10 @@
 
      <div class="card-footer text-muted">
           Призовой фонд: {{ challenge.prize }} рублей
+
+     </div>
+     <div class="card-footer text-muted">
+          Ответов:
 
      </div>
 </div>
