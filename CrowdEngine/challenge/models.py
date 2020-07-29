@@ -6,8 +6,7 @@ from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 
 from time import time
-from datetime import datetime
-
+from django.utils import timezone
 
 
 User = get_user_model()
@@ -25,6 +24,7 @@ class Challenge(models.Model):
     date_remaining = models.DateField(auto_now_add=False, blank=True, null=True)
     prize = models.CharField(max_length=20, default=10)
     categories = models.ManyToManyField('Category', related_name='challenges')
+    #answers = models.ForeignKey
 
     def __str__(self):
         return self.title
@@ -33,6 +33,11 @@ class Challenge(models.Model):
         if not self.id:
             self.slug = gen_slug(self.title)
         super().save(*args, **kwargs)
+
+    def days_remaning(self):
+        days_remaning = self.date_remaining - self.date_pub
+        return days_remaning.days
+
 
     def get_absolute_url(self):
         return reverse('challenge_detail_url', kwargs={'slug': self.slug})
@@ -46,15 +51,18 @@ class Challenge(models.Model):
 class Answer(models.Model):
     challenge = models.ForeignKey(Challenge, on_delete=models.SET_NULL, related_name='answers', null=True)
     title = models.CharField(max_length=150, db_index=True)
-    slug = models.ForeignKey(Challenge, on_delete=models.SET_NULL, related_name='challenge_slug', null=True)
+    #slug = models.ForeignKey(Challenge.slug, on_delete=models.SET_NULL, related_name='challenge_slug', null=True)
     body = models.TextField(blank=True)
     date_pub = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.title
 
+    # def get_absolute_url(self):
+    #     return reverse("blog_detail", args=[str(self.pk)])
     def get_absolute_url(self):
-        return reverse('answers_list_url', kwargs={'slug': self.slug})
+        return reverse('answer_create_url', kwargs={'slug': self.slug})
+
 
 
 class Category(models.Model):

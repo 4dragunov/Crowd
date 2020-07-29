@@ -19,7 +19,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('title', 'challenge', 'slug')
+    list_display = ('title', 'challenge',)
 
 
 admin.site.register(Challenge, ChallengeAdmin)

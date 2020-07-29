@@ -24,6 +24,7 @@
      </div>
      <div class="card-footer text-muted">
          Дата завершения: {{ challenge.date_remaining }}
+         До завершения: {{challenge.days_remaning}} дней.
 
 
      </div>
@@ -33,7 +34,7 @@
 
      </div>
      <div class="card-footer text-muted">
-          Ответов:
+          Ответов: {{ challenge.answers.count }}
 
      </div>
 </div>

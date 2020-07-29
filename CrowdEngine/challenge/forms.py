@@ -1,9 +1,21 @@
 from django import forms
-from .models import Category, Challenge
+from .models import Category, Challenge, Answer
 from django.core.exceptions import ValidationError
 from time import time
 
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = ['title', 'body']
 
+        widgets = {
+        'title': forms.TextInput(attrs={'class': 'form-control'}),
+        'body': forms.TextInput(attrs={'class': 'form-control'}),
+    }
+        labels = {
+            "title": "Тема",
+            "body": "Текст"
+        }
 class CategoryForm(forms.ModelForm):
 
     class Meta:

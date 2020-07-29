@@ -11,10 +11,17 @@
  </h1>
 <p>
     {{challenge.body}}
-     <a href="{{ challenge.answers.all.0.get_absolute_url }}" class="btn btn-primary">Ответы </a>
+
+
 
 </p>
-<div class="card-footer text-muted">
+    <div class="card-footer text-muted">
+        <a href="{% url 'answers_list_url' challenge.slug %}" class="btn btn-primary">Посмотреть ответы</a>
+        <a href="{% url 'answer_create_url' challenge.slug %}" class="btn btn-primary">Предложить решение</a>
+
+        <a href=""
+        <br>
+        <br>
       {% for category in challenge.categories.all %}
          Категория:<a href="{{ category.get_absolute_url }}"> {{ category.title }}</a>
          {% endfor %}

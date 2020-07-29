@@ -1,0 +1,31 @@
+{% extends 'challenge/base_challenge.html' %}
+
+
+{% block title %}
+    Создание ответа -  - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+        <form method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group">
+
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        {{ field.errors }}
+                    </div>
+
+                {% endif %}
+                {{ field.label }}
+                {{ field }}
+            </div>
+        {% endfor %}
+
+
+
+        <button type="submit" class="btn btn-primary"> Создать ответ</button>
+    </form>
+{% endblock %}
