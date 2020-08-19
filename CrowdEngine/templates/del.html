@@ -1,0 +1,392 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">CrowdOpinion.ru</a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href=" {% url 'main_url' %}">Главная</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href=" {% url 'challenges_list_url' %}">Обзор проблем</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'categories_list_url' %}">Категории проблем</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Учетная запись
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <p class="dropdown-item">Профиль: {{ user.username }}</p>
+                        <a class="dropdown-item" href="{% url 'password_change' %}">Изменить пароль</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+                    </div>
+                </li>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'login' %}">Войти</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'signup' %}">Регистрация</a>
+                </li>
+                {% endif %}
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
+            </form>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">CrowdOpinion.ru</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href=" {% url 'main_url' %}">Главная</a>
+                <span class="sr-only">(current)</span>
+              </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href=" {% url 'challenges_list_url' %}">Обзор проблем</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'categories_list_url' %}">Категории проблем</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Контакты</a>
+        </li>
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        {% if user.is_authenticated %}
+        <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" >
+                        Учетная запись
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <p class="dropdown-item">Профиль: {{ user.username }}</p>
+                        <a class="dropdown-item" href="{% url 'password_change' %}">Изменить пароль</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+                    </div>
+                </li>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'login' %}">Войти</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'signup' %}">Регистрация</a>
+                </li>
+                {% endif %}
+        </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Full Page Image Header with Vertically Centered Content -->
+
+
+<!-- Page Content -->
+
+
+     <header>
+            <nav>
+               <div class="menu-icon">
+                  <i class="fa fa-bars fa-2x"></i>
+               </div>
+               <div class="logo">
+                  CrowdOpinion
+               </div>
+               <div class="menu">
+                  <ul>
+                     <li><a href=" {% url 'main_url' %}">Главная</a></li>
+                     <li><a href=" {% url 'challenges_list_url' %}">Обзор проблем</a></li>
+                     <li><a href="{% url 'categories_list_url' %}">Категории проблем</a></li>
+                     <li><a href="#">Контакты</a></li>
+                     {% if user.is_authenticated %}
+                     <li><a href="{% url 'password_change' %}">Изменить пароль</a></li>
+                     <li><a href="{% url 'logout' %}">Выйти</a></li>
+                     {% endif %}
+                     {% if not user.is_authenticated %}
+                     <li><a href="{% url 'login' %}">Войти</a></li>
+                     <li><a href="{% url 'signup' %}">Регистрация</a></li>
+                     {% endif %}
+
+                  </ul>
+               </div>
+            </nav>
+         </header>
+
+
+
+
+
+MAIN
+
+{% extends 'challenge/base_challenge.html' %}
+
+{% block title %}
+    ПРИВЕТ
+{% endblock %}
+
+
+
+
+{% block content %}
+
+
+    <h1>HELLO {{ user }}</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Предложить проблемму</h5>
+                <p class="card-text">Какой-то интересный текст =)</p>
+                <p class="card-text">Призовой фонд составляет - {{ prize_amount }} рублей.</p>
+                <p class="card-text">Количество зарегистрированных пользователей - {{ total_users.0 }} человек.</p>
+                <p class="card-text">Количество создателей челенджей - {{ challenge_users.0 }} человек.</p>
+                <p class="card-text">Количество ответивших пользователей - {{ answer_users.0 }} человек.</p>
+                <a href="{% url 'challenge_create_url' %}" class="btn btn-primary">Создать проблемму</a>
+            </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Решить проблемму</h5>
+                    <p class="card-text">
+                        На текущий момент есть {{ challenge_count }} нерешенные проблеммы.
+                    </p>
+                    <p>
+                        Общее количество предложенных решений составляет {{ answers_count }} ответов.
+                    </p>
+                    <a href="{% url 'challenges_list_url' %}" class="btn btn-primary">Посмотреть список проблемм</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <section class="py-5">
+            <div class="container">
+                <h2 class="font-weight-light">Page Content</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ab nulla dolorum autem nisi officiis blanditiis voluptatem hic, assumenda aspernatur facere ipsam nemo ratione cumque magnam enim fugiat reprehenderit expedita.</p>
+            </div>
+        </section>
+
+{% endblock %}
+
+
+BASE
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!--    bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav_css.css' %}">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="{% static 'css/js/nav.js' %}"></script>
+
+    <title>
+        {% block title %}
+            CrowdOpinion.ru
+        {% endblock %}
+    </title>
+</head>
+<body class="fixed-sn light-blue-skin">
+
+
+
+
+        {% include 'nav.html' %}
+
+     <main>
+        <div class="container-fluid mt-5">
+      <h2>Advanced Double Navigation with fixed SideNav under fixed Navbar:</h2>
+      <br>
+      <h5>1. Fixed side menu, hidden on small devices.</h5>
+      <h5>2. Fixed Navbar. It will always stay visible on the top, even when you scroll down.</h5>
+      <div style="height: 2000px"></div>
+    </div>
+  </main>
+
+    <div class="container mt-5  ">
+        <div class="row">
+            <div class="col ">
+                {% block content %}
+                    Content
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-panel" align-items-center>
+        <a href="/admin" class="btn btn-outline-info">Admin</a>
+        {% block admin-panel %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
+
+
+NAV
+
+        <header>
+            <nav>
+               <div class="menu-icon">
+                  <i class="fa fa-bars fa-2x"></i>
+               </div>
+               <div class="logo">
+                  CrowdOpinion
+               </div>
+               <div class="menu">
+                  <ul>
+                     <li><a href=" {% url 'main_url' %}">Главная</a></li>
+                     <li><a href=" {% url 'challenges_list_url' %}">Обзор проблем</a></li>
+                     <li><a href="{% url 'categories_list_url' %}">Категории проблем</a></li>
+                     <li><a href="#">Контакты</a></li>
+                     {% if user.is_authenticated %}
+                     <li><a href="{% url 'password_change' %}">Изменить пароль</a></li>
+                     <li><a href="{% url 'logout' %}">Выйти</a></li>
+                     {% endif %}
+                     {% if not user.is_authenticated %}
+                     <li><a href="{% url 'login' %}">Войти</a></li>
+                     <li><a href="{% url 'signup' %}">Регистрация</a></li>
+                     {% endif %}
+
+                  </ul>
+               </div>
+            </nav>
+         </header>
+
+
+
+
+
+
+<!--<div class="card  mb-5">-->
+
+<!--    <div class="card-header text-white bg-primary">-->
+<!--      {{ challenge.title }}-->
+<!--    </div>-->
+
+<!--    <div class="card-body">-->
+<!--        <h5 class="card-title">{{ challenge.titile }}</h5>-->
+<!--        <p class="card-text">{{ challenge.body|truncatewords:45 }}</p>-->
+<!--        <a href="{{ challenge.get_absolute_url }}" class="btn btn-primary">Подробнее </a>-->
+<!--    </div>-->
+
+<!--    <div class="card-footer text-muted">-->
+<!--      {% for category in challenge.categories.all %}-->
+<!--         Категория:<a href="{{ category.get_absolute_url }}"> {{ category.title }}</a>-->
+<!--      {% endfor %}-->
+<!--     </div>-->
+
+<!--     <div class="card-footer text-muted">-->
+<!--          Дата создания: {{ challenge.date_pub }}-->
+<!--     </div>-->
+
+<!--     <div class="card-footer text-muted">-->
+<!--         Дата завершения: {{ challenge.date_remaining }}-->
+<!--         До завершения: {{challenge.days_remaning}} дней.-->
+<!--     </div>-->
+
+<!--     <div class="card-footer text-muted">-->
+<!--          Призовой фонд: {{ challenge.prize }} рублей-->
+<!--     </div>-->
+
+<!--     <div class="card-footer text-muted">-->
+<!--          Ответов: {{ challenge.answers.count }}-->
+<!--     </div>-->
+<!--</div>-->
+
+
+                        	<!-- SIDEBAR -->
+
+<h1>HELLO {{ user }}</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Предложить проблемму</h5>
+                <p class="card-text">Какой-то интересный текст =)</p>
+                <p class="card-text">Призовой фонд составляет - {{ prize_amount }} рублей.</p>
+                <p class="card-text">Количество зарегистрированных пользователей - {{ total_users.0 }} человек.</p>
+                <p class="card-text">Количество создателей челенджей - {{ challenge_users.0 }} человек.</p>
+                <p class="card-text">Количество ответивших пользователей - {{ answer_users.0 }} человек.</p>
+                <a href="{% url 'challenge_create_url' %}" class="btn btn-primary">Создать проблемму</a>
+            </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Решить проблемму</h5>
+                    <p class="card-text">
+                        На текущий момент есть {{ challenge_count }} нерешенные проблеммы.
+                    </p>
+                    <p>
+                        Общее количество предложенных решений составляет {{ answers_count }} ответов.
+                    </p>
+                    <a href="{% url 'challenges_list_url' %}" class="btn btn-primary">Посмотреть список проблемм</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<form action="{% url 'challenge_create_url' %}" method="post">
+        {% csrf_token %}
+    {% for field in form %}
+            <div class="form-group">
+
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        {{ field.errors }}
+                    </div>
+
+                {% endif %}
+                {{ field.label }}
+                {{ field }}
+            </div>
+    {% endfor %}
+            <button type="submit" class="btn btn-primary"> Создать проблему</button>
+
+
+</form>
+
+
+{% endblock %}

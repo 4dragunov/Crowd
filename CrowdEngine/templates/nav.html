@@ -1,0 +1,70 @@
+
+		<!-- HEADER -->
+		<header>
+			
+			<!-- MENU BLOCK -->
+			<div class="menu_block">
+			
+				<!-- CONTAINER -->
+				<div class="container clearfix">
+					
+					<!-- LOGO -->
+					<div class="logo pull-left">
+						<a href="{% url 'main_url' %}" >
+                          <span class="b1">Crowd</span>
+<!--                          <span class="b2">R</span>-->
+<!--                          <span class="b3">O</span>-->
+<!--                          <span class="b4">W</span>-->
+<!--                          <span class="b5">D</span>-->
+                          <span class="b5">Opinion</span>
+<!--                          <span class="b5">p</span>-->
+<!--                          <span class="b5">i</span>-->
+<!--                          <span class="b5">n</span>-->
+<!--                          <span class="b5">i</span>-->
+<!--                          <span class="b5">O</span>-->
+<!--                          <span class="b5">n</span>-->
+                        </a>
+
+					</div><!-- //LOGO -->
+					
+					<!-- SEARCH FORM -->
+					<div id="search-form" class="pull-right">
+						<form method="get" action="#">
+							<input type="text" name="Search" value="Поиск" onFocus="if (this.value == 'Search') this.value = '';" onBlur="if (this.value == '') this.value = 'Search';" />
+						</form>
+					</div><!-- SEARCH FORM -->
+					
+					<!-- MENU -->
+					<div class="pull-right">
+						<nav class="navmenu center">
+							<ul>
+								<li class="first active scroll_btn"><a href=" {% url 'main_url' %}" >Главная</a></li>
+								<li class="scroll_btn"><a href="#about" >О нас</a></li>
+								<li class="scroll_btn"><a href="{% url 'challenges_list_url' %}" >Задачи</a></li>
+<!--							<a href="{% url 'categories_list_url' %}">Категории проблем</a>-->
+								<li class="sub-menu">
+									{% if user.is_authenticated %}
+									<a href="javascript:void(0);" >Профиль {{ user }}</a>
+									<ul>
+										<li><a href="{% url 'password_change' %}">Изменить пароль</a></li>
+										<li><a href="{% url 'logout' %}">Выйти</a></li>
+									</ul>
+									{% endif %}
+									{% if not user.is_authenticated %}
+									<a href="javascript:void(0);" >Войти/Регистрация</a>
+									<ul>
+										<li><a href="{% url 'login' %}">Войти</a></li>
+										<li><a href="{% url 'signup' %}">Регистрация</a></li>
+									</ul>
+									{% endif %}
+
+
+								</li>
+							</ul>
+						</nav>
+					</div><!-- //MENU -->
+				</div><!-- //MENU BLOCK -->
+			</div><!-- //CONTAINER -->
+		</header><!-- //HEADER -->
+		
+		

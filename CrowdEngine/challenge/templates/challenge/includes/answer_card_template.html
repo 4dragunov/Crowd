@@ -1,15 +1,47 @@
- <div class="card  mb-5">
-  <div class="card-header text-white bg-primary">
-      {{ answer.title }}
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">{{ answer.title }}</h5>
-
-    <p class="card-text">{{ answer.body|truncatewords:45 }}</p>
-<!--    <a href="" class="btn btn-primary">Подробнее </a>-->
-
-  </div>
+{% load static %}
 
 
-</div>
+{# <div class="card  mb-5">#}
+{#  <div class="card-header text-white bg-primary">#}
+{#      {{ answer.title }}#}
+{#  </div>#}
+{#  <div class="card-body">#}
+{#    <h5 class="card-title">{{ answer.title }}</h5>#}
+{##}
+{#    <p class="card-text">{{ answer.body|truncatewords:45 }}</p>#}
+{#    <p class="card-text">Автор: {{ answer.author }}</p>#}
+{##}
+{#  </div>#}
+{##}
+{##}
+{#</div>#}
+
+
+
+
+	<div class="blog_post_descr">
+		<div class="blog_post_date">Дата публикации: {{ answer.date_pub }}</div>
+
+		<a class="blog_post_title" href="{{ challenge.get_absolute_url }}" >{{ answer.title }}</a>
+
+
+		<div class="blog_post_content">{{ answer.body|truncatewords:30 }}
+
+            <ul class="blog_post_info">
+			    <li><a href="javascript:void(0);" >Автор: {{ answer.author }}</a></li>
+
+                <a href="#">
+                    <img src="{% static 'images/like.png' %}" width="23px">
+                    <strong>{{answer.answer_like.count}}</strong>
+                </a>
+                <a href="#">
+                    <img src="{% static 'images/dislike.png' %}" width="23px">
+                    <strong>{{answer.answer_dislike.count}}</strong>
+                </a>
+		    </ul>
+		</div>
+		<a class="read_more_btn" href="{{ challenge.get_absolute_url }}">Подробнее</a>
+         <hr>
+	</div>
+
 

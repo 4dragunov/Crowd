@@ -36,11 +36,14 @@
           </div>
 
           <div class="col-md-6 offset-md-4">              
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="contact_btn">
                 Войти
               </button>
-              <a href="{% url 'password_reset' %}" class="btn btn-link">
+              <a href="{% url 'password_reset' %}" class="contact_btn">
                 Забыли пароль?
+              </a>
+              <a href="{% url 'signup' %}" class="contact_btn">
+                Регистрация
               </a>
           </div>
         </form>

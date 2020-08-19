@@ -20,17 +20,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_au(qjw3rpx2$xjp=9z1a+el#u(ul!!t@&iow=56gf*36i5noi'
+SECRET_KEY = '1fMyuBgkTvu6guUQBJRVqRBZI1o_58GaR1c2Rgb9XuTXozmqm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "1381bce3b153.ngrok.io"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+
     'users',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'challenge',
+    'sorl.thumbnail',
+
 ]
 
 MIDDLEWARE = [
@@ -131,3 +134,7 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 LOGIN_URL='/auth/login/'
 LOGIN_REDIRECT_URL = 'main_url'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

@@ -5,11 +5,27 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="mt-3 mb-5">
-        Ответы по проблеме: {{ answers.0.challenge.title }}
-    </h1>
-    {% for answer in answers %}
-    {% include 'challenge/includes/answer_card_template.html' %}
-    {% endfor %}
+<section id="blog">
+	<!-- CONTAINER -->
+	<div class="container">
+		<!-- ROW -->
+		<div class="row">
+            <h1 class="mt-3 mb-5">
+                Ответы по проблеме: {{ answers.0.challenge.title }}
+            </h1>
+
+            <div class="blog_block col-lg-9 col-md-9 padbot50 mx-auto">
+                {% for answer in answers %}
+                    {% include 'challenge/includes/answer_card_template.html' %}
+                {% endfor %}
+            </div>
+            {% include 'challenge/includes/side_bar.html' %}
+
+		</div><!-- //ROW -->
+	</div><!-- //CONTAINER -->
+</section><!-- //BLOG -->
 
 {% endblock %}
+
+
+

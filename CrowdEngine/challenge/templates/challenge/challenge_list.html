@@ -1,0 +1,21 @@
+{% extends 'challenge/base_challenge.html' %}
+
+{% block content %}
+<!-- //BLOG -->
+<section id="blog">
+	<!-- CONTAINER -->
+	<div class="container">
+		<!-- ROW -->
+		<div class="row">
+			 <div class="blog_block col-lg-9 col-md-9 padbot50">
+				{% for challenge in challenges %}
+				{% include 'challenge/includes/challenge_card_template.html' %}
+				{% endfor %}
+			 </div>
+
+  			 {% include 'challenge/includes/side_bar.html' %}
+
+		</div><!-- //ROW -->
+	</div><!-- //CONTAINER -->
+</section><!-- //BLOG -->
+{% endblock %}

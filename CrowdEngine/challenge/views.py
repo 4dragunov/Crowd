@@ -3,15 +3,19 @@ from .models import Challenge, Category, Answer
 from django.views.generic import View
 from .forms import CategoryForm, ChallengeForm, AnswerForm
 from .utils import ObjectDetailMixin, ObjectUpdateMixin, ObjectDeleteMixin
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count
 
 class AnswerCreate(View):
 
     def get(self, request, slug):
         challenge = Challenge.objects.get(slug__iexact=slug)
         form = AnswerForm()
-        return render(request, 'challenge/answer_create.html', context={'form': form})
+        return render(request, 'challenge/answer_create.html', context={'form': form,
+                                                                        'challenge':challenge})
+
 
     def post(self, request, slug):
         challenge = Challenge.objects.get(slug__iexact=slug)
@@ -22,37 +26,61 @@ class AnswerCreate(View):
             new_answer.save()
 
             return redirect('answers_list_url', challenge.slug)
-        return render(request, 'challenge/answer_create.html', context={'form': form})
-    #     return render(request, 'challenge/category_update_form.html', context={'form': bound_form, 'category' : category})
+        return render(request, 'challenge/answer_create.html', context={'form': form,
+                                                                        'challenge':challenge})
+
 def answers_list(request, slug):
-    # challenge.answers.all.0.get_absolute_url
-    # print(slug)
+    top_categories = Category.objects.all().annotate(cnt=Count('challenges')).order_by('-cnt')[:4]
+    top_challenges = Challenge.objects.order_by("answers")[:3]
 
     answers = Answer.objects.filter(challenge__slug=slug)
-   # answers_count = Answer.objects.filter(challenge__slug=slug).count()
+    return render(request, 'challenge/answers_list.html', context={'answers': answers,
+                                                                   'top_categories':top_categories,
+                                                                   'top_challenges':top_challenges})
 
-    # #return HttpResponse('Hello')
-    # return render(request, 'challenge/answers_list.html', context={'answers': answers})
-
-    #answers = Answer.objects.filter(challenge=challenge)
-
-    return render(request, 'challenge/answers_list.html', context={'answers': answers})
-    #return reverse('answers_list_url', args=[slug=slug  ])
-    #return reverse('answers_list_url', kwargs={'slug': self.slug})
 
 def challenges_list(request):
     challenges = Challenge.objects.all()
+    top_challenges = Challenge.objects.order_by("answers")[:3]
+    #top_categories = Challenge.objects.all().annotate(cnt=Count('categories'))
+    top_categories = Category.objects.all().annotate(cnt=Count('challenges')).order_by('-cnt')[:4]
+    return render(request, 'challenge/challenge_list.html',
+                  context={'challenges': challenges,
+                  'top_challenges' : top_challenges,
+                   'top_categories' : top_categories})
 
-    return render(request, 'challenge/index.html', context={'challenges': challenges})
 
-# def challenge_detail(request, slug):
-#     challenge = Challenge.objects.get(slug__iexact=slug)
-#     return render(request, 'challenge/challenge_detail.html', context={'challenge': challenge})
-# и тогда в urls обработчик challenge_detail
 
-class ChallengeDetail(ObjectDetailMixin, View):
-    model = Challenge
-    template = 'challenge/challenge_detail.html'
+# class ChallengeDetail(ObjectDetailMixin, View):
+#     model = Challenge
+#     template = 'challenge/challenge_detail.html'
+
+def challenge_detail(request, slug):
+    #answer_like = Answer_like.objects.get(answer=answer)
+    #answer_like = Answer_like.objects.filter(answer=slug)
+    #print(answer_like)
+    challenge = get_object_or_404(Challenge, slug__iexact=slug)
+    top_challenges = Challenge.objects.order_by("answers")[:3]
+    answers = Answer.objects.filter(challenge__slug=slug).annotate(cnt=(Count('answer_like')-Count('answer_dislike'))).order_by("-cnt")[:5]
+
+   # answer_like = Answer_like.objects.filter(answer__answer=slug)
+
+    #answer_like = Answer_like.objects.all()
+   # print(answer_like)
+    #answer_like = Answer.objects.filter(challenge__slug=slug)
+
+
+
+    top_categories = Category.objects.all().annotate(cnt=Count('challenges')).order_by('-cnt')[:4]
+    return render(request, 'challenge/challenge_detail.html',
+                  context={'challenge': challenge,
+                  'top_challenges' : top_challenges,
+                   'top_categories' : top_categories,
+                           'answers': answers,
+                           })
+
+
+
 
 def categories_list(request):
     categories = Category.objects.all()

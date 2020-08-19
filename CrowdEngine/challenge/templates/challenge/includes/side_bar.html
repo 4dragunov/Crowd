@@ -1,0 +1,53 @@
+<div class="sidebar col-lg-3 col-md-3 padbot50">
+{#							<!-- META WIDGET -->#}
+{#							<div class="sidepanel widget_meta">#}
+{#							<ul>#}
+{#								<li><a href="javascript:void(0);" >Advertising</a></li>#}
+{#								<li><a href="javascript:void(0);" >Fashion & Trends</a></li>#}
+{#								<li><a href="javascript:void(0);" >Media Projects</a></li>#}
+{#								<li><a href="javascript:void(0);" >Small Business</a></li>#}
+{#								<li><a href="javascript:void(0);" >Creative</a></li>#}
+{#							</ul>#}
+{#						</div><!-- //META WIDGET --#}
+{#							 POPULAR POSTS WIDGET -->#}
+							<div class="sidepanel widget_popular_posts">
+							<h3><b>Популярные</b> проблемы</h3>
+								{% for top_challenge in top_challenges %}
+							<div class="recent_posts_widget clearfix">
+								<div class="post_item_img_widget">
+                                    <a href="{{ top_challenge.get_absolute_url }}">
+                                    {% load thumbnail %}
+                                    {% thumbnail top_challenge.image "960x339" crop="center" upscale=True as im %}
+                                     <img class="card-img" src="{{ im.url }}">
+                                    {% endthumbnail %}
+                                    </a>
+{#									<img src="images/blog/1.jpg" alt="" />#}
+								</div>
+								<div class="post_item_content_widget">
+									<a class="title" href="blog.html" > {{ top_challenge.title }} </a>
+									<ul class="post_item_inf_widget">
+										<li>{{top_challenge.date_pub}}</li>
+									</ul>
+								</div>
+							</div>
+
+								{% endfor %}
+						</div><!-- //POPULAR POSTS WIDGET -->
+							<hr>
+							<!-- POPULAR TAGS WIDGET -->
+							<div class="sidepanel widget_tags">
+							<h3><b>Популярные</b> категории</h3>
+							<ul>
+								{% for category in top_categories %}
+								<li><a href="{{ category.get_absolute_url }}" >{{category.title}} {{ category.challenges.count }}</a></li>
+								{% endfor %}
+
+							</ul>
+						</div><!-- POPULAR TAGS WIDGET -->
+							<hr>
+							<!-- TEXT WIDGET -->
+							<div class="sidepanel widget_text">
+							<h3><b>About</b> Blog</h3>
+							<p>I must admit this particular defense set me on edge a little bit, for two reasons. The first is that she’s being held to a completely different standard than male politicians are held to.</p>
+						</div><!-- //TEXT WIDGET -->
+			 </div><!-- //SIDEBAR -->

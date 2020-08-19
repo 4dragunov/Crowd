@@ -1,41 +1,35 @@
- <div class="card  mb-5">
-  <div class="card-header text-white bg-primary">
-      {{ challenge.title }}
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">{{ challenge.titile }}</h5>
+<!-- BLOG POST -->
+<div class="blog_post margbot50 clearfix" data-animated="fadeInUp">
+	<div class="blog_post_img">
+        {% load thumbnail %}
+        <a href="{{ challenge.get_absolute_url }}">
+        {% thumbnail challenge.image "960x339" crop="center" upscale=True as im %}
+            <img class="card-img" src="{{ im.url }}">
+        {% endthumbnail %}
+        </a>
+{#		#<img src="{{challenge.challenge_img}}" alt="" />#}
+		<a class="zoom" href="{{ challenge.get_absolute_url }}" ></a>
+	</div>
+	<div class="blog_post_descr">
+		<div class="blog_post_date">Дата публикации: {{ challenge.date_pub }}</div>
+		<div class="blog_post_date mt-1">До завершения: {{challenge.days_remaning}} дней.</div>
+		<a class="blog_post_title" href="{{ challenge.get_absolute_url }}" >{{ challenge.title }}</a>
+		<ul class="blog_post_info">
+			<li><a href="javascript:void(0);" >{{ challenge.challenge_author }}</a></li>
+			<li><a href="javascript:void(0);" >
+				{% for category in challenge.categories.all %}
+				<a href="{{ category.get_absolute_url }}"> {{ category.title }}</a>
+				{% endfor %}
+				</a></li>
+			<li><a href="{% url 'answers_list_url' challenge.slug %}" >{{ challenge.answers.count }} ответа</a></li>
 
-    <p class="card-text">{{ challenge.body|truncatewords:45 }}</p>
-    <a href="{{ challenge.get_absolute_url }}" class="btn btn-primary">Подробнее </a>
+		</ul>
+		<hr>
+		<div class="blog_post_content">{{ challenge.body|truncatewords:30 }}
 
+		</div>
+		<a class="read_more_btn" href="{{ challenge.get_absolute_url }}" >Подробнее</a>
 
-
-  </div>
-
-    <div class="card-footer text-muted">
-      {% for category in challenge.categories.all %}
-         Категория:<a href="{{ category.get_absolute_url }}"> {{ category.title }}</a>
-      {% endfor %}
-     </div>
-     <div class="card-footer text-muted">
-          Дата создания: {{ challenge.date_pub }}
-
-
-     </div>
-     <div class="card-footer text-muted">
-         Дата завершения: {{ challenge.date_remaining }}
-         До завершения: {{challenge.days_remaning}} дней.
-
-
-     </div>
-
-     <div class="card-footer text-muted">
-          Призовой фонд: {{ challenge.prize }} рублей
-
-     </div>
-     <div class="card-footer text-muted">
-          Ответов: {{ challenge.answers.count }}
-
-     </div>
-</div>
+	</div>
+</div><!-- //BLOG POST -->
 

@@ -4,27 +4,43 @@
     Создание проблемы -  - {{ block.super }}
 {% endblock %}
 
+
+
+
+
+
 {% block content %}
+    <section id="single_page">
+        <div class="container mt-5">
+            <div class="row">
+            <div class="col-lg-10 mx-auto">
 
-<form action="{% url 'new_post' %}" method="post">
-        {% csrf_token %}
-    {% for field in form %}
-            <div class="form-group">
+                <h3> Опубликовать задачу </h3>
 
-                {% if field.errors %}
-                    <div class="alert alert-danger">
-                        {{ field.errors }}
-                    </div>
+                <form id="comment_form" action="{% url 'challenge_create_url' %}" class="row" method="post">
+                    {% csrf_token %}
 
-                {% endif %}
-                {{ field.label }}
-                {{ field }}
+                    {% for field in form %}
+                        <div class="col-lg-8 col-md-8">
+                            <div class="form-group">
+                                {% if field.errors %}
+                                    <div class="alert alert-danger">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                                {{ field.label }}
+                                {{ field }}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                <div class="col-lg-8 col-md-8">
+                 <input type="submit" class="contact_btn pull-left" value="Создать задачу">
+                </div>
+                </form>
+
             </div>
-    {% endfor %}
-            <button type="submit" class="btn btn-primary"> Создать проблему</button>
-
-
-</form>
-
-
+            </div>
+        </div>
+    </section>
 {% endblock %}

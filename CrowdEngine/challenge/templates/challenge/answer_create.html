@@ -6,26 +6,54 @@
 {% endblock %}
 
 {% block content %}
+    <section id="single_page">
+        <div class="container mt-5">
+            <div class="row">
+            <div class="col-lg-10 mx-auto">
 
-        <form method="post">
-        {% csrf_token %}
+                <h3> Написать ответ на проблему {{ challenge.title }} </h3>
 
-        {% for field in form %}
-            <div class="form-group">
+                <form id="comment_form" class="row" method="post">
+                    {% csrf_token %}
 
-                {% if field.errors %}
-                    <div class="alert alert-danger">
-                        {{ field.errors }}
-                    </div>
+                    {% for field in form %}
+                        <div class="col-lg-8 col-md-8">
+                            <div class="form-group">
+                                {% if field.errors %}
+                                    <div class="alert alert-danger">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                                {{ field.label }}
+                                {{ field }}
+                            </div>
+                        </div>
+                    {% endfor %}
 
-                {% endif %}
-                {{ field.label }}
-                {{ field }}
+                <div class="col-lg-8 col-md-8">
+                 <input type="submit" class="contact_btn pull-left" value="Отправить ответ">
+                </div>
+                </form>
+
             </div>
-        {% endfor %}
-
-
-
-        <button type="submit" class="btn btn-primary"> Создать ответ</button>
-    </form>
+            </div>
+        </div>
+    </section>
 {% endblock %}
+
+
+
+
+{#            <form id="comment_form" class="row" action="#" method="post">#}
+{#								<div class="col-lg-4 col-md-4">#}
+{#                                <input type="text" name="name" value="Your Name *" onFocus="if (this.value == 'Your Name *') this.value = '';" onBlur="if (this.value == '') this.value = 'Your Name *';" />#}
+{#									<input type="text" name="phone" value="E-mail *" onFocus="if (this.value == 'E-mail *') this.value = '';" onBlur="if (this.value == '') this.value = 'E-mail *';" />#}
+{#									<input type="text" name="phone" value="Web site" onFocus="if (this.value == 'Web site') this.value = '';" onBlur="if (this.value == '') this.value = 'Web site';" />#}
+{#									<div class="comment_note">All fields marked with an asterisk (*) are required</div>#}
+{#								</div>#}
+{#								<div class="col-lg-8 col-md-8">#}
+{#									<textarea name="message" onFocus="if (this.value == 'Your message *') this.value = '';" onBlur="if (this.value == '') this.value = 'Your message *';">Your message *</textarea>#}
+{#									<input class="contact_btn pull-right" type="submit" value="Send message" />#}
+{#								</div>#}
+{##}
+

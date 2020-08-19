@@ -1,9 +1,11 @@
 from django.db import models
 from django.shortcuts import reverse, redirect
 
-from django.contrib.auth import get_user_model
 
 from django.utils.text import slugify
+from django.contrib.auth import get_user_model
+
+from django.contrib.contenttypes.fields import GenericRelation
 
 from time import time
 from django.utils import timezone
@@ -22,9 +24,12 @@ class Challenge(models.Model):
     body = models.TextField(blank=True, db_index=True)
     date_pub = models.DateField(auto_now_add=True)
     date_remaining = models.DateField(auto_now_add=False, blank=True, null=True)
-    prize = models.CharField(max_length=20, default=10)
+    prize = models.IntegerField(default=1000)
     categories = models.ManyToManyField('Category', related_name='challenges')
-    #answers = models.ForeignKey
+    challenge_author = models.ForeignKey(User, on_delete=models.CASCADE,related_name="challenges", null=True)
+    image = models.ImageField(blank=True, upload_to='challenge/', null=True)
+
+
 
     def __str__(self):
         return self.title
@@ -55,6 +60,15 @@ class Answer(models.Model):
     body = models.TextField(blank=True)
     date_pub = models.DateField(auto_now_add=True)
 
+    author = models.ForeignKey(User, on_delete=models.CASCADE,
+                               related_name="answers", null=True)
+
+    answer_like = models.ManyToManyField(User, related_name='answer_liked', blank=True)
+    answer_dislike = models.ManyToManyField(User, related_name='answer_disliked', blank=True)
+
+
+
+
     def __str__(self):
         return self.title
 
@@ -81,3 +95,5 @@ class Category(models.Model):
 
     def get_delete_url(self):
         return reverse('category_delete_url', kwargs={'slug': self.slug})
+
+

@@ -10,7 +10,8 @@ class AnswerForm(forms.ModelForm):
 
         widgets = {
         'title': forms.TextInput(attrs={'class': 'form-control'}),
-        'body': forms.TextInput(attrs={'class': 'form-control'}),
+        'body': forms.Textarea(attrs={'class': 'form-control'}),
+
     }
         labels = {
             "title": "Тема",
@@ -40,27 +41,28 @@ class CategoryForm(forms.ModelForm):
         return new_slug
 
 
-    # def save(self):
-    #     new_category = Category.objects.create(title=self.cleaned_data['title'],
-    #                                            slug = self.cleaned_data['slug']
-    #                                            )
-    #     return new_category
-
 class ChallengeForm(forms.ModelForm):
 
     class Meta:
         model = Challenge
-        fields = ['title', 'slug', 'body', 'categories', 'prize', 'date_remaining']
+        fields = ['title', 'body', 'categories', 'prize', 'date_remaining', 'image']
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'slug': forms.TextInput(attrs={'class': 'form-control'}),
+            #'slug': forms.TextInput(attrs={'class': 'form-control'}),
             'body' : forms.Textarea(attrs={'class': 'form-control'}),
             'categories': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'prize': forms.TextInput(attrs={'class': 'form-control'}),
             'date_remaining': forms.SelectDateWidget(attrs={'class': 'form-control'}),
-        }
 
+        }
+        labels = {
+            "title": "Тема",
+            "body": "Текст",
+            "categories": "Категория проблемы",
+            'prize':"Призовой фонд",
+            'date_remaining':"Дата завершения",
+        }
     def clean_slug(self):
         new_slug = self.cleaned_data['slug'].lower()
 
