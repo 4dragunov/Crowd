@@ -1,0 +1,73 @@
+{% extends 'challenge/base_challenge.html' %}
+
+{% load static %}
+{% load likes_answer %}
+
+{% block content %}
+<!-- BLOG -->
+<section id="blog">
+    <!-- CONTAINER -->
+    <div class="container">
+        <!-- ROW -->
+        <div class="row">
+            <!-- BLOG BLOCK -->
+            <div class="blog_block col-lg-9 col-md-9 padbot50">
+                <!-- SINGLE BLOG POST -->
+                <div class="single_blog_post clearfix" data-animated="fadeInUp">
+               <a href="{{ challenge.get_absolute_url }}">
+               <div class="single_blog_post_title">{{challenge.title}}</div>
+               </a>
+                    <div class="single_blog_post_descr">
+                        <div class="single_blog_post_date">
+                            {{answer.date_pub}}</div>
+                        <div class="single_blog_post_title">
+                            {{answer.title}}</div>
+                        <ul class="single_blog_post_info">
+                            <li><a href="javascript:void(0);" >{{challenge.challenge_author}}</a></li>
+                            <li><a href="javascript:void(0);" >
+                                {% for category in challenge.categories.all %}
+				                    <a href="{{ category.get_absolute_url }}"> {{ category.title }}</a>
+				                {% endfor %}
+                            </a></li>
+                            <li><a href="" >{{ challenge.answers.count }} ответа</a></li>
+                        </ul>
+                    </div>
+{#                    <div class="single_blog_post_img">#}
+{#                        {% load thumbnail %}#}
+{#                        {% thumbnail challenge.image "960x339" crop="center" upscale=True as im %}#}
+{#                         <img class="card-img" src="{{ im.url }}">#}
+{#                        {% endthumbnail %}#}
+{#                    </div>#}
+                    <div class="single_blog_post_content">
+                        <p class="margbot50"> {{ answer.body}}</p>
+                    </div>
+                </div><!-- //SINGLE BLOG POST -->
+
+                <!-- SINGLE BLOG POST TAG -->
+{#                <div class="single_blog_post_tags margbot50" data-animated="fadeInUp">#}
+{#                    <ul>#}
+{#                        <li><a href="javascript:void(0);" >Fashion</a></li>#}
+{#                        <li><a href="javascript:void(0);" >Shop</a></li>#}
+{#                        <li><a href="javascript:void(0);" >Color</a></li>#}
+{#                    </ul>#}
+{#                </div><!-- //SINGLE BLOG POST TAG -->#}
+                <hr>
+
+                <a href="
+                    {{ answer.get_answer_list }}"
+                   class="btn pull-left">Назад к другим ответам</a>
+
+{#                <hr class="margbot80">#}
+{#						<!-- LEAVE A COMMENT -->#}
+{#						<div class="leave_comment" data-animated="fadeInUp">#}
+{#							<h3><b>Есть</b> идея?</h3>#}
+{#                            <a href="{% url 'answer_create_url' challenge.slug %}" class="contact_btn pull-left">Написать предложение</a>#}
+{#						</div><!-- //LEAVE A COMMENT -->#}
+            </div><!-- //BLOG BLOCK -->
+
+  			 {% include 'challenge/includes/side_bar.html' %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

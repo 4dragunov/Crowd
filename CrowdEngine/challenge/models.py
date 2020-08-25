@@ -63,10 +63,8 @@ class Answer(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name="answers", null=True)
 
-    answer_like = models.ManyToManyField(User, related_name='answer_liked', blank=True)
-    answer_dislike = models.ManyToManyField(User, related_name='answer_disliked', blank=True)
-
-
+    # answer_like = models.ManyToManyField(User, related_name='answer_liked', blank=True)
+    # answer_dislike = models.ManyToManyField(User, related_name='answer_disliked', blank=True)
 
 
     def __str__(self):
@@ -75,8 +73,22 @@ class Answer(models.Model):
     # def get_absolute_url(self):
     #     return reverse("blog_detail", args=[str(self.pk)])
     def get_absolute_url(self):
-        return reverse('answer_create_url', kwargs={'slug': self.slug})
+        return reverse('answer_detail_url', kwargs={'slug':
+                                                        self.challenge.slug,
+                                                    'pk': self.pk})
+    def get_answer_list(self):
+        return reverse('answers_list_url', kwargs={'slug': self.challenge.slug})
 
+class AnswerLike(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name="user_liked")
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE,
+                               related_name="likes")
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE,
+                                  related_name='challenge', null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Category(models.Model):

@@ -1,6 +1,7 @@
 {% extends 'challenge/base_challenge.html' %}
 
 {% load static %}
+{% load likes_answer %}
 
 
 
@@ -27,18 +28,13 @@
 				                {% endfor %}
                             </a></li>
                             <li><a href="" >{{ challenge.answers.count }} ответа</a></li>
-
-
                         </ul>
                     </div>
                     <div class="single_blog_post_img">
-
                         {% load thumbnail %}
-
                         {% thumbnail challenge.image "960x339" crop="center" upscale=True as im %}
                          <img class="card-img" src="{{ im.url }}">
                         {% endthumbnail %}
-
 {#                        <img src="images/blog/1.jpg" alt="" />#}
                     </div>
                     <div class="single_blog_post_content">
@@ -47,19 +43,23 @@
                 </div><!-- //SINGLE BLOG POST -->
 
                 <!-- SINGLE BLOG POST TAG -->
-                <div class="single_blog_post_tags margbot50" data-animated="fadeInUp">
-                    <ul>
-                        <li><a href="javascript:void(0);" >Fashion</a></li>
-                        <li><a href="javascript:void(0);" >Shop</a></li>
-                        <li><a href="javascript:void(0);" >Color</a></li>
-                    </ul>
-                </div><!-- //SINGLE BLOG POST TAG -->
+{#                <div class="single_blog_post_tags margbot50" data-animated="fadeInUp">#}
+{#                    <ul>#}
+{#                        <li><a href="javascript:void(0);" >Fashion</a></li>#}
+{#                        <li><a href="javascript:void(0);" >Shop</a></li>#}
+{#                        <li><a href="javascript:void(0);" >Color</a></li>#}
+{#                    </ul>#}
+{#                </div><!-- //SINGLE BLOG POST TAG -->#}
                 <hr>
                 <!-- COMMENTS -->
                 <div id="comments" class="margbot30" data-animated="fadeInUp">
-                    <h3><b>Предложенные решения </b><span class="comments_count">{{ answers.count }}</span></h3>
+                    <h3><b>Предложенные решения </b><span
+                            class="comments_count">
+                        {{ challenge.answers.count }}</span></h3>
                     <ul>
                         {% for answer in answers %}
+                            {% is_liked answer.pk as is_liked_bool %}
+                            {% count_likes answer.pk as likes_counter %}
 
                         <li class="clearfix" data-animated="fadeInUp">
                             <div class="pull-left avatar">
@@ -67,20 +67,28 @@
                             </div>
                             <div class="comment_right">
                                 <div class="comment_info clearfix">
-                                    <div class="pull-left comment_author">{{ answer.author }}</div>
+                                    <div class="pull-left comment_author">
+                                        {{ answer.author }}</div>
                                     <div class="pull-left comment_inf_sep">|</div>
                                     <div class="pull-left comment_date">{{ answer.date_pub }}</div>
                                     <div class="pull-left comment_inf_sep">|</div>
                                     <div class="pull-left">
-                                        <a href="#">
-                                            <img src="{% static 'images/like.png' %}" width="23px">
-                                             <strong>{{answer.answer_like.count}}</strong>
-                                        </a>
-                                        <a href="#">
-                                            <img src="{% static 'images/dislike.png' %}" width="23px">
-                                            <strong>{{answer.answer_dislike.count}}</strong>
+
+                                         {% if is_liked_bool %}
+
+                                        <a href="{% url 'answer_del_like_url' challenge.slug answer.pk 'challenge_detail_url'%}">
+                                            <img src="
+                                        {% static 'images/active_like.png' %}" width="23px">
                                         </a>
 
+                                        {% else %}
+                                        <a href="{% url 'answer_add_like_url' challenge.slug answer.pk 'challenge_detail_url'%}">
+                                            <img src="
+                                         {% static 'images/disactive_like.png' %}" width="23px">
+                                        </a>
+
+                                        {% endif %}
+                                        Понравилось: {{ likes_counter }}
 
                                     </div>
 
@@ -100,10 +108,6 @@
                         {% endfor %}
                     </ul>
                      <a href="{% url 'answers_list_url' challenge.slug %}" class="contact_btn pull-center">Посмотреть все ответы</a>
-
-
-
-
                 </div>
                 <!-- //COMMENTS -->
                 <hr class="margbot80">
@@ -111,34 +115,11 @@
 						<div class="leave_comment" data-animated="fadeInUp">
 							<h3><b>Есть</b> идея?</h3>
                             <a href="{% url 'answer_create_url' challenge.slug %}" class="contact_btn pull-left">Написать предложение</a>
-
-
 						</div><!-- //LEAVE A COMMENT -->
-					</div><!-- //BLOG BLOCK -->
-
-
+            </div><!-- //BLOG BLOCK -->
   			 {% include 'challenge/includes/side_bar.html' %}
-
         </div>
     </div>
 </section>
 
- <h1 class="mt-5">
-     {{ challenge.title }}
- </h1>
-<p>
-    {{challenge.body}}
-</p>
-    <div class="card-footer text-muted">
-
-        <a href="{% url 'answers_list_url' challenge.slug %}" class="btn btn-primary">Посмотреть ответы</a>
-        <a href="{% url 'answer_create_url' challenge.slug %}" class="btn btn-primary">Предложить решение</a>
-
-
-        <br>
-        <br>
-      {% for category in challenge.categories.all %}
-         Категория:<a href="{{ category.get_absolute_url }}"> {{ category.title }}</a>
-         {% endfor %}
-     </div>
 {% endblock %}

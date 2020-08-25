@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from .models import Challenge, Category, Answer
+from .models import Challenge, Category, Answer, AnswerLike
 from django.views.generic import View
 from .forms import CategoryForm, ChallengeForm, AnswerForm
 from .utils import ObjectDetailMixin, ObjectUpdateMixin, ObjectDeleteMixin
@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class AnswerCreate(View):
 
@@ -32,11 +35,30 @@ class AnswerCreate(View):
 def answers_list(request, slug):
     top_categories = Category.objects.all().annotate(cnt=Count('challenges')).order_by('-cnt')[:4]
     top_challenges = Challenge.objects.order_by("answers")[:3]
+    challenge = get_object_or_404(Challenge,slug__iexact=slug)
 
     answers = Answer.objects.filter(challenge__slug=slug)
     return render(request, 'challenge/answers_list.html', context={'answers': answers,
                                                                    'top_categories':top_categories,
-                                                                   'top_challenges':top_challenges})
+                                                                   'top_challenges':top_challenges,
+                                                                   'challenge':challenge})
+@login_required
+def answerAddLike(request, slug, pk, url):
+
+    answer = get_object_or_404(Answer, pk=pk)
+    challenge = get_object_or_404(Challenge, slug__iexact=slug)
+    AnswerLike.objects.get_or_create(user=request.user, answer=answer,
+                                     challenge=challenge)
+    return redirect(url, slug=slug)
+
+
+@login_required
+def answerDelLike(request, slug, pk, url):
+    answer = get_object_or_404(Answer, pk=pk)
+    challenge = get_object_or_404(Challenge, slug__iexact=slug)
+    answer_like = AnswerLike.objects.get(user=request.user, answer=answer, challenge=challenge)
+    answer_like.delete()
+    return redirect(url, slug=slug)
 
 
 def challenges_list(request):
@@ -49,38 +71,37 @@ def challenges_list(request):
                   'top_challenges' : top_challenges,
                    'top_categories' : top_categories})
 
-
-
-# class ChallengeDetail(ObjectDetailMixin, View):
-#     model = Challenge
-#     template = 'challenge/challenge_detail.html'
-
 def challenge_detail(request, slug):
-    #answer_like = Answer_like.objects.get(answer=answer)
-    #answer_like = Answer_like.objects.filter(answer=slug)
-    #print(answer_like)
+
     challenge = get_object_or_404(Challenge, slug__iexact=slug)
     top_challenges = Challenge.objects.order_by("answers")[:3]
-    answers = Answer.objects.filter(challenge__slug=slug).annotate(cnt=(Count('answer_like')-Count('answer_dislike'))).order_by("-cnt")[:5]
-
-   # answer_like = Answer_like.objects.filter(answer__answer=slug)
-
-    #answer_like = Answer_like.objects.all()
-   # print(answer_like)
-    #answer_like = Answer.objects.filter(challenge__slug=slug)
-
-
-
+    answers = Answer.objects.filter(challenge__slug=slug).annotate(cnt=(
+        Count('likes'))).order_by('-cnt')[:3]
     top_categories = Category.objects.all().annotate(cnt=Count('challenges')).order_by('-cnt')[:4]
+
     return render(request, 'challenge/challenge_detail.html',
                   context={'challenge': challenge,
                   'top_challenges' : top_challenges,
                    'top_categories' : top_categories,
-                           'answers': answers,
+                    'answers': answers,
+
                            })
 
 
+def answer_detail(request, slug, pk):
+    answer = get_object_or_404(Answer, pk=pk)
+    challenge = get_object_or_404(Challenge, slug__iexact=slug)
+    top_challenges = Challenge.objects.order_by("answers")[:2]
+    top_categories = Category.objects.all().annotate(cnt=Count(
+        'challenges')).order_by('-cnt')[:3]
 
+
+    return render(request, 'challenge/answer_detail.html',
+                  context={'answer':answer,
+                           'challenge':challenge,
+                           'top_challenges': top_challenges,
+                           'top_categories': top_categories,
+                           })
 
 def categories_list(request):
     categories = Category.objects.all()

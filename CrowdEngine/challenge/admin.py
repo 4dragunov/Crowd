@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Challenge, Category, Answer
+from .models import Challenge, Category, Answer, AnswerLike
 
 
 
@@ -20,7 +20,11 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('title', 'challenge', 'author')
+    list_display = ('title', 'challenge', 'author', 'pk')
+
+@admin.register(AnswerLike)
+class AnswerLikeAdmin(admin.ModelAdmin):
+    list_display = ('user', 'answer', 'challenge')
 
 # @admin.register(Answer_like)
 # class LikeAnswerAdmin(admin.ModelAdmin):

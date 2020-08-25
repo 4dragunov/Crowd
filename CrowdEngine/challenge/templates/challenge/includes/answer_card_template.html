@@ -1,47 +1,52 @@
 {% load static %}
-
-
-{# <div class="card  mb-5">#}
-{#  <div class="card-header text-white bg-primary">#}
-{#      {{ answer.title }}#}
-{#  </div>#}
-{#  <div class="card-body">#}
-{#    <h5 class="card-title">{{ answer.title }}</h5>#}
-{##}
-{#    <p class="card-text">{{ answer.body|truncatewords:45 }}</p>#}
-{#    <p class="card-text">Автор: {{ answer.author }}</p>#}
-{##}
-{#  </div>#}
-{##}
-{##}
-{#</div>#}
-
-
-
-
+{% load likes_answer %}
+{% is_liked answer.pk as is_liked_bool %}
+{% count_likes answer.pk as likes_counter %}
 	<div class="blog_post_descr">
 		<div class="blog_post_date">Дата публикации: {{ answer.date_pub }}</div>
 
-		<a class="blog_post_title" href="{{ challenge.get_absolute_url }}" >{{ answer.title }}</a>
+		<a class="blog_post_title" href="
+{{ answer.get_absolute_url }}" >{{ answer.title }}</a>
 
 
 		<div class="blog_post_content">{{ answer.body|truncatewords:30 }}
 
-            <ul class="blog_post_info">
+            <ul class="blog_post_info pt-3">
 			    <li><a href="javascript:void(0);" >Автор: {{ answer.author }}</a></li>
 
-                <a href="#">
-                    <img src="{% static 'images/like.png' %}" width="23px">
-                    <strong>{{answer.answer_like.count}}</strong>
-                </a>
-                <a href="#">
-                    <img src="{% static 'images/dislike.png' %}" width="23px">
-                    <strong>{{answer.answer_dislike.count}}</strong>
-                </a>
+
+
+                                       {% if is_liked_bool %}
+
+                                        <a href="{% url 'answer_del_like_url' challenge.slug answer.pk 'answers_list_url'%}">
+                                            <img src="
+                                        {% static 'images/active_like.png' %}" width="23px">
+                                        </a>
+
+                                        {% else %}
+                                        <a href="{% url 'answer_add_like_url' challenge.slug answer.pk 'answers_list_url'%}">
+                                            <img src="
+                                         {% static 'images/disactive_like.png' %}" width="23px">
+                                        </a>
+
+                                        {% endif %}
+                                        Понравилось: {{ likes_counter }}
+
 		    </ul>
 		</div>
-		<a class="read_more_btn" href="{{ challenge.get_absolute_url }}">Подробнее</a>
+        <ul class="blog_post_info">
+            <li>
+		        <a class="read_more_btn" href="
+                    {% url 'answer_detail_url' challenge.slug answer.pk %}">Прочитать полностью или
+                    оставить
+                    комментарий
+                </a>
+            </li>
+            <li>Редактировать</li>
+        </ul>
+
          <hr>
-	</div>
+
+	    </div>
 
 
