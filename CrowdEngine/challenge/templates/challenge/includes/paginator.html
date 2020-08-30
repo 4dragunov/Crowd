@@ -1,0 +1,73 @@
+<div class="my_pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s">
+    <ul class="my_pagination">
+        {% if items.has_previous %}
+                <li class="my_pagination-item--wide my_first">
+                    <a class="my_pagination-link--wide my_first"  href="?page
+                        ={{ items.previous_page_number }}">Предыдущая
+                    </a>
+                </li>
+        {% endif %}
+
+        {% for i in paginator.page_range %}
+                {% if items.number == i %}
+
+                <li class="my_pagination-item is-active">
+                    <a class="my_pagination-link">
+                        {{i}}
+                    </a>
+                </li>
+
+                {% else %}
+                <li class="my_pagination-item my_first-number">
+                    <a class="my_pagination-link" href="?page={{ i }}">
+                        {{ i }}
+                    </a>
+                </li>
+                {% endif %}
+        {% endfor %}
+
+        {% if items.has_next %}
+                <li class="my_pagination-item--wide my_last"> <a
+                        class="my_pagination-link--wide my_last" href="?page={{ items.next_page_number }}">Следующая</a></li>
+
+        {% endif %}
+    </ul>
+</div>
+{#page-link#}
+{#</nav>#}
+{##}
+{#<div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s">#}
+{##}
+{#	<ul class="pagination">#}
+{#		<li class="pagination-item--wide first"> <a class="pagination-link--wide first" href="#">Previous</a> </li>#}
+{#		<li class="pagination-item first-number"> <a class="pagination-link" href="#">1</a> </li>#}
+{#		<li class="pagination-item"> <a class="pagination-link" href="#">2</a> </li>#}
+{#		<li class="pagination-item is-active"> <a class="pagination-link" href="#">3</a> </li>#}
+{#		<li class="pagination-item"> <a class="pagination-link" href="#">4</a> </li>#}
+{#		<li class="pagination-item"> <a class="pagination-link" href="#">5</a> </li>#}
+{#		<li class="pagination-item--wide last"> <a class="pagination-link--wide last" href="#">Next</a> </li>#}
+{#	</ul>#}
+{##}
+{#</div>#}
+{##}
+{#<nav aria-label="Переключение страниц">#}
+{#    <ul class="pagination">#}
+{#        {% if items.has_previous %}#}
+{#                <li class="page-item"><a class="page-link" href="?page={{ items.previous_page_number }}">&laquo; Предыдущая</a></li>#}
+{#        {% else %}#}
+{#                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo; Предыдущая</a></li>#}
+{#        {% endif %}#}
+{#        {% for i in paginator.page_range %}#}
+{#                {% if items.number == i %}#}
+{#                <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(текущая)</span></span></li>#}
+{#                {% else %}#}
+{#                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>#}
+{#                {% endif %}#}
+{#        {% endfor %}#}
+{#        {% if items.has_next %}#}
+{#                <li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}">Следующая &raquo;</a></li>#}
+{#        {% else %}#}
+{#                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Следующая &raquo;</a></li>#}
+{#        {% endif %}#}
+{#    </ul>#}
+{#</nav>#}

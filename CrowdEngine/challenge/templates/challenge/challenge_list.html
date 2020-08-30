@@ -8,14 +8,30 @@
 		<!-- ROW -->
 		<div class="row">
 			 <div class="blog_block col-lg-9 col-md-9 padbot50">
-				{% for challenge in challenges %}
-				{% include 'challenge/includes/challenge_card_template.html' %}
+             <h2 class="mt-3 mb-5">
+                Актуальные задачи на {{ date }}
+            </h2>
+				{% for challenge in page %}
+				    {% include 'challenge/includes/challenge_card_template.html' %}
 				{% endfor %}
+
+                {% if page.has_other_pages %}
+                    {% include "challenge/includes/paginator.html" with items=page paginator=paginator %}
+                {% endif %}
 			 </div>
+{#        <div class="col-lg-12 col-md-12 padbot50">#}
+
+{#        </div>#}
+
 
   			 {% include 'challenge/includes/side_bar.html' %}
 
+
 		</div><!-- //ROW -->
-	</div><!-- //CONTAINER -->
+
+
+    </div>
+
+
 </section><!-- //BLOG -->
 {% endblock %}

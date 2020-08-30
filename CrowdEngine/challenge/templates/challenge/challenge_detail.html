@@ -27,7 +27,9 @@
 				                    <a href="{{ category.get_absolute_url }}"> {{ category.title }}</a>
 				                {% endfor %}
                             </a></li>
-                            <li><a href="" >{{ challenge.answers.count }} ответа</a></li>
+                            <li><a href="{% url 'answers_list_url' challenge.slug %}"
+                            >{{ challenge.answers.count }}
+                                ответа</a></li>
                         </ul>
                     </div>
                     <div class="single_blog_post_img">
@@ -40,6 +42,13 @@
                     <div class="single_blog_post_content">
                         <p class="margbot50"> {{ challenge.body}}</p>
                     </div>
+
+
+                {% if challenge.challenge_author == user %}
+                 <a href="{% url 'challenge_update_url' challenge.slug %}"
+                        class="contact_btn pull-center">Редактировать</a>
+                {% endif %}
+
                 </div><!-- //SINGLE BLOG POST -->
 
                 <!-- SINGLE BLOG POST TAG -->
@@ -107,15 +116,34 @@
 
                         {% endfor %}
                     </ul>
-                     <a href="{% url 'answers_list_url' challenge.slug %}" class="contact_btn pull-center">Посмотреть все ответы</a>
+                     <a href="{% url 'answers_list_url' challenge.slug %}"
+                        class="contact_btn pull-center">Посмотреть все
+                         ответы и прокомментировать</a>
                 </div>
                 <!-- //COMMENTS -->
-                <hr class="margbot80">
+                <hr class="margbot20">
 						<!-- LEAVE A COMMENT -->
-						<div class="leave_comment" data-animated="fadeInUp">
-							<h3><b>Есть</b> идея?</h3>
-                            <a href="{% url 'answer_create_url' challenge.slug %}" class="contact_btn pull-left">Написать предложение</a>
-						</div><!-- //LEAVE A COMMENT -->
+                <div class="leave_comment" data-animated="fadeInUp">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <h3>Посмотреть другие задачи</h3>
+                                <a href="{% url 'challenges_list_url' %}"
+                                   class="contact_btn pull-left">Вернутся назад
+                                    </a>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                        <div class="col">
+                            <h3><b>Есть</b> идея по задаче?</h3>
+                            <a href="
+                                {% url 'answer_create_url' challenge.slug %}" class="contact_btn
+                                pull-left">Написать предложение</a>
+                        </div>
+                    </div>
+                </div>
+			    </div><!-- //LEAVE A COMMENT -->
             </div><!-- //BLOG BLOCK -->
   			 {% include 'challenge/includes/side_bar.html' %}
         </div>

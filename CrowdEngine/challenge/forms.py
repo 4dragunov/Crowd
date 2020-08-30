@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category, Challenge, Answer
+from .models import Category, Challenge, Answer, Comment
 from django.core.exceptions import ValidationError
 from time import time
 
@@ -14,8 +14,8 @@ class AnswerForm(forms.ModelForm):
 
     }
         labels = {
-            "title": "Тема",
-            "body": "Текст"
+            "title": "Основная идея",
+            "body": "Подробное описание"
         }
 class CategoryForm(forms.ModelForm):
 
@@ -71,7 +71,18 @@ class ChallengeForm(forms.ModelForm):
 
         return new_slug
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ("text",)
 
+        widgets = {
+            'text': forms.Textarea(),
+        }
 
-   
+        labels = {
+
+            "text": "Текст"
+        }
+
 

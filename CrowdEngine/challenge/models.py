@@ -26,7 +26,8 @@ class Challenge(models.Model):
     date_remaining = models.DateField(auto_now_add=False, blank=True, null=True)
     prize = models.IntegerField(default=1000)
     categories = models.ManyToManyField('Category', related_name='challenges')
-    challenge_author = models.ForeignKey(User, on_delete=models.CASCADE,related_name="challenges", null=True)
+    challenge_author = models.ForeignKey(User, on_delete=models.CASCADE,
+                                         related_name="challenges", null=True)
     image = models.ImageField(blank=True, upload_to='challenge/', null=True)
 
 
@@ -109,3 +110,11 @@ class Category(models.Model):
         return reverse('category_delete_url', kwargs={'slug': self.slug})
 
 
+class Comment(models.Model):
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE,
+                             related_name='comments', null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE,
+                               related_name="comments", null=True)
+    text = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    # unique_together = ["post", "author"]

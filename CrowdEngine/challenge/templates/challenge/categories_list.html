@@ -5,16 +5,69 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="mb-4"> Категории:
-    {% for category in categories %}
-        <h3>
-            <a href="{{ category.get_absolute_url }}">
-                {{category.title}}
-            </a>
-            - {{category.challenges.count}}
-        </h3>
+{#<h1 class="mb-4"> Категории:#}
+{#    {% for category in categories %}#}
+{#        <h3>#}
+{#            <a href="{{ category.get_absolute_url }}">#}
+{#                {{category.title}}#}
+{#            </a>#}
+{#            - {{category.challenges.count}}#}
+{#        </h3>#}
+{##}
+{##}
+{#    {% endfor%}#}
+{#</h1>#}
+
+    <section id="blog">
+	<!-- CONTAINER -->
+	<div class="container">
+		<!-- ROW -->
+		<div class="row">
+
+			 <div class="blog_block col-lg-9 col-md-9 padbot50">
+             <h2 class="mt-3 mb-5">
+                Категории:
+            </h2>
+				{% for category in categories %}
+				    <h3>
+                        <a href="{{ category.get_absolute_url }}">
+                            {{category.title}}
+                        </a>
+                        - {{category.challenges.count}}
+                    </h3>
+				{% endfor %}
 
 
-    {% endfor%}
-</h1>
+
+                    <div class="leave_comment mt-5" data-animated="fadeInUp">
+                    <div class="row">
+
+                         <div >
+                            <h3>Посмотреть <b>все задачи</b> </h3>
+                            <a href="{% url 'challenges_list_url' %}"
+                               class="contact_btn pull-left">Список задач
+                                </a>
+                        </div>
+
+
+                    </div>
+			    </div><!-- //LEAVE A COMMENT -->
+
+
+			 </div>
+{#        <div class="col-lg-12 col-md-12 padbot50">#}
+
+{#        </div>#}
+
+
+
+  			 {% include 'challenge/includes/side_bar.html' %}
+
+
+		</div><!-- //ROW -->
+
+
+    </div>
+
+
 {% endblock %}

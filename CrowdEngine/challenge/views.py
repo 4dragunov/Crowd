@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from .models import Challenge, Category, Answer, AnswerLike
+from .models import Challenge, Category, Answer, AnswerLike, Comment
 from django.views.generic import View
-from .forms import CategoryForm, ChallengeForm, AnswerForm
+from .forms import CategoryForm, ChallengeForm, AnswerForm, CommentForm
 from .utils import ObjectDetailMixin, ObjectUpdateMixin, ObjectDeleteMixin
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from django.contrib.auth import get_user_model
+from django.core.paginator import Paginator
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -25,23 +27,71 @@ class AnswerCreate(View):
         form = AnswerForm(request.POST)
         if form.is_valid():
             new_answer = form.save(commit=False)
+            new_answer.author = request.user
             new_answer.challenge = challenge
             new_answer.save()
 
             return redirect('answers_list_url', challenge.slug)
         return render(request, 'challenge/answer_create.html', context={'form': form,
                                                                         'challenge':challenge})
+def answerEdit(request, slug, pk):
+    is_form_edit = True
+    answer = get_object_or_404(Answer, challenge__slug=slug,
+                             pk__iexact=pk)
+    challenge = get_object_or_404(Challenge, slug__iexact=slug)
+    if answer.author == request.user:
+        form = AnswerForm(request.POST or None,
+                        files=request.FILES or None, instance=answer)
+        if form.is_valid():
+            post = form.save()
+            return redirect('answer_detail_url', slug, pk)
+        form = AnswerForm(instance=answer)
+
+        return render(request, "challenge/answer_create.html",
+                      context={'form': form,
+                               "is_form_edit": is_form_edit,
+                               'challenge': challenge})
+    else:
+        return redirect('main_url')
 
 def answers_list(request, slug):
     top_categories = Category.objects.all().annotate(cnt=Count('challenges')).order_by('-cnt')[:4]
     top_challenges = Challenge.objects.order_by("answers")[:3]
     challenge = get_object_or_404(Challenge,slug__iexact=slug)
+    answers = Answer.objects.filter(challenge__slug=slug).annotate(cnt=(
+        Count('likes'))).order_by('-cnt')
+    paginator = Paginator(answers,
+                          4)  # показывать по 10 записей на странице.
+    page_number = request.GET.get(
+        'page')  # переменная в URL с номером запрошенной страницы
+    page = paginator.get_page(
+        page_number)  # получить записи с нужным смещением
 
-    answers = Answer.objects.filter(challenge__slug=slug)
+
     return render(request, 'challenge/answers_list.html', context={'answers': answers,
                                                                    'top_categories':top_categories,
                                                                    'top_challenges':top_challenges,
-                                                                   'challenge':challenge})
+                                                                   'challenge':challenge,
+                                                                   'page':page,
+                                                                   'paginator':paginator})
+def add_comment(request, slug, pk):
+    answer = get_object_or_404(Answer, pk=pk)
+    form = CommentForm(request.POST or None)
+
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        form.instance.author = request.user
+        form.instance.answer = answer
+        new_comment.save()
+        return redirect('answer_detail_url', slug, pk)
+    return render(request, "challenge/answer_detail.html", context={"form": form})
+
+def del_comment(request, slug, pk, pk_comment):
+    answer = get_object_or_404(Answer, pk=pk)
+    comment = answer.comments.filter(pk=pk_comment)
+    comment.delete()
+    return redirect('answer_detail_url', slug, pk)
+
 @login_required
 def answerAddLike(request, slug, pk, url):
 
@@ -62,14 +112,26 @@ def answerDelLike(request, slug, pk, url):
 
 
 def challenges_list(request):
-    challenges = Challenge.objects.all()
+    user = request.user
+    challenges = Challenge.objects.all().order_by('-date_pub')
+    paginator = Paginator(challenges,
+                          4)  # показывать по 10 записей на странице.
+    page_number = request.GET.get(
+        'page')  # переменная в URL с номером запрошенной страницы
+    page = paginator.get_page(
+        page_number)  # получить записи с нужным смещением
     top_challenges = Challenge.objects.order_by("answers")[:3]
     #top_categories = Challenge.objects.all().annotate(cnt=Count('categories'))
     top_categories = Category.objects.all().annotate(cnt=Count('challenges')).order_by('-cnt')[:4]
+    date = timezone.now().date()
     return render(request, 'challenge/challenge_list.html',
                   context={'challenges': challenges,
                   'top_challenges' : top_challenges,
-                   'top_categories' : top_categories})
+                   'top_categories' : top_categories,
+                    'page': page, 'paginator': paginator,
+                           'date':date,
+                           'user':user
+                           })
 
 def challenge_detail(request, slug):
 
@@ -94,18 +156,50 @@ def answer_detail(request, slug, pk):
     top_challenges = Challenge.objects.order_by("answers")[:2]
     top_categories = Category.objects.all().annotate(cnt=Count(
         'challenges')).order_by('-cnt')[:3]
-
+    form = CommentForm()
+    items = answer.comments.all().order_by("-created")
 
     return render(request, 'challenge/answer_detail.html',
                   context={'answer':answer,
                            'challenge':challenge,
                            'top_challenges': top_challenges,
                            'top_categories': top_categories,
+                           'form':form,
+                           'items':items
                            })
 
 def categories_list(request):
-    categories = Category.objects.all()
-    return render(request, 'challenge/categories_list.html', context={'categories': categories})
+    categories = Category.objects.all().annotate(cnt=Count(
+        'challenges')).order_by('-cnt')
+    top_challenges = Challenge.objects.order_by("answers")[:3]
+    # top_categories = Challenge.objects.all().annotate(cnt=Count('categories'))
+    top_categories = Category.objects.all().annotate(cnt=Count('challenges')).order_by('-cnt')[:4]
+    return render(request, 'challenge/categories_list.html',
+                  context={'categories': categories,
+                           'top_challenges': top_challenges,
+                           'top_categories': top_categories,
+
+                           })
+
+def categoryDetail(request, slug):
+    category = get_object_or_404(Category, slug__iexact=slug)
+    challenges = category.challenges.all()
+    paginator = Paginator(challenges,
+                          4)  # показывать по 10 записей на странице.
+    page_number = request.GET.get(
+        'page')  # переменная в URL с номером запрошенной страницы
+    page = paginator.get_page(
+        page_number)  # получить записи с нужным смещением
+    top_challenges = Challenge.objects.order_by("answers")[:3]
+    # top_categories = Challenge.objects.all().annotate(cnt=Count('categories'))
+    top_categories = Category.objects.all().annotate(
+        cnt=Count('challenges')).order_by('-cnt')[:4]
+    return render(request, 'challenge/categories_detail.html',
+                  context={'top_challenges': top_challenges,
+                           'top_categories': top_categories,
+                           'page': page, 'paginator': paginator,
+                           'category':category})
+
 
 class CategoryDetail(ObjectDetailMixin, View):
     model = Category
@@ -133,7 +227,9 @@ class ChallengeCreate(View):
         bound_form = ChallengeForm(request.POST)
 
         if bound_form.is_valid():
-            new_challenge = bound_form.save()
+            new_challenge = bound_form.save(commit=False)
+            bound_form.instance.challenge_author = request.user
+            new_challenge.save()
             return redirect(new_challenge)
         return render(request, 'challenge/challenge_create.html', context={'form': bound_form})
 

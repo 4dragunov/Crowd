@@ -1,5 +1,5 @@
 from django import template
-from ..models import AnswerLike
+from ..models import AnswerLike, Comment
 register = template.Library()
 
 
@@ -16,3 +16,8 @@ def is_liked(context, answer_id):
 @register.simple_tag()
 def count_likes(answer_id):
         return AnswerLike.objects.filter(answer=answer_id).count()
+
+
+# @register.simple_tag()
+# def count_commets(answer_id):
+#         return Answer.objects.filter(answer=answer_id).count()

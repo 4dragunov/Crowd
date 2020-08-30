@@ -9,11 +9,14 @@
 {{ answer.get_absolute_url }}" >{{ answer.title }}</a>
 
 
-		<div class="blog_post_content">{{ answer.body|truncatewords:30 }}
+		<div class="blog_post_content">
+        <p style="margin-bottom: 10px">
+            {{ answer.body|truncatewords:30 }}
+        </p>
 
             <ul class="blog_post_info pt-3">
 			    <li><a href="javascript:void(0);" >Автор: {{ answer.author }}</a></li>
-
+                <li>
 
 
                                        {% if is_liked_bool %}
@@ -31,6 +34,11 @@
 
                                         {% endif %}
                                         Понравилось: {{ likes_counter }}
+                </li>
+            <li>
+                                        Комментарии:
+                                        {{ answer.comments.count }}
+            </li>
 
 		    </ul>
 		</div>
@@ -42,7 +50,12 @@
                     комментарий
                 </a>
             </li>
-            <li>Редактировать</li>
+            {% if answer.author == request.user %}
+            <li>
+                <a href="
+{% url 'answer_edit_url' challenge.slug answer.pk%}">
+                   Редактировать</a></li>
+            {% endif %}
         </ul>
 
          <hr>

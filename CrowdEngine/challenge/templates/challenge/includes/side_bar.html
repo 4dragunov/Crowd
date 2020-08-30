@@ -41,6 +41,11 @@
 								{% for category in top_categories %}
 								<li><a href="{{ category.get_absolute_url }}" >{{category.title}} {{ category.challenges.count }}</a></li>
 								{% endfor %}
+                                <li>
+                                    <a href="{% url 'categories_list_url' %}">
+                                    <b>Все</b> категории</li>
+                                    </a>
+                                </li>
 
 							</ul>
 						</div><!-- POPULAR TAGS WIDGET -->

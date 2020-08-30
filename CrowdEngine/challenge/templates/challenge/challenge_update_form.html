@@ -6,7 +6,10 @@
 {% endblock %}
 
 {% block content %}
-    <form action="{{ challenge.get_update_url }}" method="post">
+    <section id="blog" class="mb-5">
+        <div class="row ">
+            <div class="container col-8">
+    <form action="{{ challenge.get_update_url }}" method="post" class="mb-5">
         {% csrf_token %}
 
         {% for field in form %}
@@ -25,6 +28,10 @@
 
 
 
-        <button type="submit" class="btn btn-primary"> Изменить проблему</button>
+        <button type="submit" class="btn"> Сохранить изменения </button>
     </form>
+            </div>
+        </div>
+    </section>
+
 {% endblock %}

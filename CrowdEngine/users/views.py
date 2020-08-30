@@ -8,7 +8,7 @@ from challenge.forms import Answer, Challenge
 
 #  импортируем класс формы, чтобы сослаться на неё во view-классе
 from .forms import CreationForm
-
+from django.shortcuts import render
 
 class SignUp(CreateView):
     form_class = CreationForm
@@ -17,3 +17,4 @@ class SignUp(CreateView):
 #
 # def answer_author_list(request):
 #     answers = Answer.objects.filter(author=a)
+

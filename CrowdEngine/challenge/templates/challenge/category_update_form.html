@@ -6,25 +6,28 @@
 {% endblock %}
 
 {% block content %}
-    <form action="{{ category.get_update_url }}" method="post">
-        {% csrf_token %}
+    <section id="blog">
+        <div class="row">
+            <div class="container col-9">
+                <form action="{{ category.get_update_url }}" method="post">
+                    {% csrf_token %}
 
-        {% for field in form %}
-            <div class="form-group">
+                    {% for field in form %}
+                    <div class="form-group">
 
-                {% if field.errors %}
-                    <div class="alert alert-danger">
-                        {{ field.errors }}
+                        {% if field.errors %}
+                            <div class="alert alert-danger">
+                                {{ field.errors }}
+                            </div>
+
+                        {% endif %}
+                        {{ field.label }}
+                        {{ field }}
                     </div>
-
-                {% endif %}
-                {{ field.label }}
-                {{ field }}
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary"> Изменить категорию</button>
+                </form>
             </div>
-        {% endfor %}
-
-
-
-        <button type="submit" class="btn btn-primary"> Изменить категорию</button>
-    </form>
+        </div>
+    </section>
 {% endblock %}

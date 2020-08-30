@@ -11,7 +11,7 @@
 					<!-- LOGO -->
 					<div class="logo pull-left">
 						<a href="{% url 'main_url' %}" >
-                          <span class="b1">Crowd</span>
+                          <span class="b1" style="padding: 0">Crowd</span>
 <!--                          <span class="b2">R</span>-->
 <!--                          <span class="b3">O</span>-->
 <!--                          <span class="b4">W</span>-->
@@ -39,8 +39,11 @@
 						<nav class="navmenu center">
 							<ul>
 								<li class="first active scroll_btn"><a href=" {% url 'main_url' %}" >Главная</a></li>
-								<li class="scroll_btn"><a href="#about" >О нас</a></li>
+
 								<li class="scroll_btn"><a href="{% url 'challenges_list_url' %}" >Задачи</a></li>
+                                <li class="scroll_btn"><a href="{% url 'about' %}" >О нас</a></li>
+{#                                <li class="scroll_btn"><a href="#about"#}
+{#                                >Как это работает</a></li>#}
 <!--							<a href="{% url 'categories_list_url' %}">Категории проблем</a>-->
 								<li class="sub-menu">
 									{% if user.is_authenticated %}

@@ -15,9 +15,12 @@
                 <!-- SINGLE BLOG POST -->
                 <div class="single_blog_post clearfix" data-animated="fadeInUp">
                <a href="{{ challenge.get_absolute_url }}">
-               <div class="single_blog_post_title">{{challenge.title}}</div>
+               <span class="single_blog_post_title" style="font-size:
+               30px">Проблема:
+                   {{challenge.title}}</span>
                </a>
-                    <div class="single_blog_post_descr">
+                    <div class="single_blog_post_descr" style="margin-top:
+                    10px">
                         <div class="single_blog_post_date">
                             {{answer.date_pub}}</div>
                         <div class="single_blog_post_title">
@@ -29,7 +32,9 @@
 				                    <a href="{{ category.get_absolute_url }}"> {{ category.title }}</a>
 				                {% endfor %}
                             </a></li>
-                            <li><a href="" >{{ challenge.answers.count }} ответа</a></li>
+                            <li><a href="" >
+                                Комментариев: {{ answer.comments.count }}
+                                </a></li>
                         </ul>
                     </div>
 {#                    <div class="single_blog_post_img">#}
@@ -42,7 +47,7 @@
                         <p class="margbot50"> {{ answer.body}}</p>
                     </div>
                 </div><!-- //SINGLE BLOG POST -->
-
+                 {% include 'challenge/includes/comments.html' with answer=answer items=items form=form %}
                 <!-- SINGLE BLOG POST TAG -->
 {#                <div class="single_blog_post_tags margbot50" data-animated="fadeInUp">#}
 {#                    <ul>#}

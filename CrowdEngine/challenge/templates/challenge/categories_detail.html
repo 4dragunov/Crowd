@@ -1,19 +1,63 @@
 {% extends 'challenge/base_challenge.html' %}
-
-{% block title %}
- {{ category.title }} - {{ block.super }}
-{% endblock %}
-
-
 {% block content %}
- <h1 class="mt-3">
-     Проблемы по теме {{ category.title|title }}:
- </h1>
-<p>
-    {% for challenge in category.challenges.all %}
-    {% include 'challenge/includes/challenge_card_template.html' %}
-    {% endfor %}
-</p>
+
+<!-- //BLOG -->
+<section id="blog">
+	<!-- CONTAINER -->
+	<div class="container">
+		<!-- ROW -->
+		<div class="row">
+            <h2 class="mt-3 mb-5">
+                Задачи в категории: <a href="
+                {{ category.get_absolute_url }}">
+                {{ category.title }}</a>
+                    </h2>
+			 <div class="blog_block col-lg-9 col-md-9 padbot50">
+				{% for challenge in page %}
+				    {% include 'challenge/includes/challenge_card_template.html' %}
+				{% endfor %}
+
+                {% if page.has_other_pages %}
+                    {% include "challenge/includes/paginator.html" with items=page paginator=paginator %}
+                {% endif %}
+
+                    <div class="leave_comment mt-5" data-animated="fadeInUp">
+                    <div class="row">
+                        <div class="container col-6">
+                            <h3>Посмотреть <b>все категории</b> </h3>
+                            <a href="{% url 'categories_list_url' %}"
+                               class="contact_btn pull-left">Список категорий
+                                </a>
+                        </div>
+                         <div class="container col-6">
+                            <h3>Посмотреть <b>все задачи</b> </h3>
+                            <a href="{% url 'challenges_list_url' %}"
+                               class="contact_btn pull-left">Список задач
+                                </a>
+                        </div>
+
+
+                    </div>
+			    </div><!-- //LEAVE A COMMENT -->
+
+
+			 </div>
+{#        <div class="col-lg-12 col-md-12 padbot50">#}
+
+{#        </div>#}
+
+
+
+  			 {% include 'challenge/includes/side_bar.html' %}
+
+
+		</div><!-- //ROW -->
+
+
+    </div>
+
+
+</section><!-- //BLOG -->
 {% endblock %}
 
 

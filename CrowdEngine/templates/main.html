@@ -1,155 +1,279 @@
 {% extends 'challenge/base_challenge.html' %}
 {#{% load includes %}#}
 {% block content %}
-<section class="clearfix parallax breadcrumbs_block">
-			<div class="container center mb-2 mt-1">
-				<h1><b>Crowd</b> Opinion</h1>
-                <h4>Мы объединяем людей, которые решают повседневные
-                    проблемы, чтобы привнести в мир новаторское мышление
-                    .<br><b>Мы хотим изменить мир к лучшему. <br><b>Вы с нами?
-                    </b></h4>
-
-            </div>
-</section>
 <section>
-<div class="container">
-    <div class="row" data-animated="fadeInUp">
-        <div class="col-md-5 mx-auto">
-            <div>
-                <div class="bg-white rounded ml-3 p-4 shadow mb-2 text-center">
-                    <h2 class="mb-4 font-weight-bold">
-                        Предложить задачу
-                    </h2>
-                    <p class="mb-4 text-primary tex">
-                        <h5>
-                    Вы команда или организация? </h5>
-                    <h5>Пытаетесь найти инновационный прорыв или вам просто нужны свежие идеи?</h5>
-                            <h5>
-                            Опишите вашу проблемы и более {{ total_users.0 }} человек помогут найти креативное решение!
+<div class="flexslider top_slider">
+
+				<ul class="slides">
+					<li class="slide1">
+						<div class="flex_caption1">
+							<p class="title1 captionDelay2 FromTop">Crowd</p>
+							<p class="title2 captionDelay4 FromTop">Opinion</p>
+{#							<p class="title3 captionDelay6 FromTop">Templates</p>#}
+							<p class="title4 captionDelay7 FromBottom">
+                                Мы объединяем людей с новаторским мышлением,
+                                которые каждый день решают актуальные
+                                проблемы и изменяют мир к лучшему.
+                                <br><b> Вы с нами?</b>
+                            </p>
+						</div>
+						<a class="slide_btn FromRight" href="javascript:void
+						(0);">О нас</a>
+					<li class="slide2">
+						<div class="flex_caption1">
+							<p class="title1 captionDelay6 FromLeft">Responsive</p>
+							<p class="title2 captionDelay4 FromLeft">Design</p>
+							<p class="title3 captionDelay2 FromLeft">Theme</p>
+							<p class="title4 captionDelay7 FromLeft">The template is suitable for any company and the direction that appreciates style, purity and quality of the web site.</p>
+						</div>
+						<a class="slide_btn FromRight" href="javascript:void(0);" >Read More</a>
+					</li>
+					<li class="slide3">
+						<div class="flex_caption1">
+							<p class="title1 captionDelay1 FromBottom">Amazing</p>
+							<p class="title2 captionDelay2 FromBottom">Video</p>
+							<p class="title3 captionDelay3 FromBottom">Background</p>
+							<p class="title4 captionDelay5 FromBottom">The template is suitable for any company and the direction that appreciates style, purity and quality of the web site.</p>
+						</div>
+						<a class="slide_btn FromRight" href="javascript:void(0);" >Read More</a>
+
+						<!-- VIDEO BACKGROUND -->
+						<a id="P2" class="player" data-property="{videoURL:'tDvBwPzJ7dY',containment:'.top_slider .slide3',autoPlay:true, mute:true, startAt:0, opacity:1}" ></a>
+						<!-- //VIDEO BACKGROUND -->
+					</li>
+				</ul>
+			</div>
+{#			<div id="carousel">#}
+{#				<ul class="slides">#}
+{#					<li><img src="images/slider/slide1_bg.jpg" alt="" /></li>#}
+{#					<li><img src="images/slider/slide2_bg.jpg" alt="" /></li>#}
+{#					<li><img src="images/slider/slide3_bg.jpg" alt="" /></li>#}
+{#				</ul>#}
+{#			</div><!-- //TOP SLIDER -->#}
+		</section><!-- //HOME -->
+
+ <section id="about">
+			<!-- SERVICES -->
+			<div class="services_block padbot40" data-appear-top-offset="-200" data-animated="fadeInUp">
+
+				<!-- CONTAINER -->
+				<div class="container">
+
+					<!-- ROW -->
+					<div class="row">
+						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6
+						col-ss-12 margbot30">
+							<a class="services_item" href="javascript:void(0);" >
+								<p><b>Инновационная </b> платформа</p>
+								<span>Мы предлагаем двустороннюю платформу, где пользователи могут создавать задачи, которые необходимо разрешить, а инноваторы могут предлагать свои идеи и получать призы!</span>
+							</a>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6
+						col-ss-12 margbot30">
+							<a class="services_item" href="javascript:void(0);" >
+								<p><b>Нескончаемый поток </b> решений</p>
+								<span>На платформе Вы можете принять участие
+                                    как организация, нуждающаяся в решении проблем и получить свежий взгляд, а так же, как инициатор, готовый найти инновационные идеи для поставленных задач и получить приз. </span>
+							</a>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6
+						col-ss-12 margbot30">
+							<a class="services_item" href="javascript:void(0);" >
+								<p>Многообразие<b> направлений</b>
+                                </p>
+								<span>На нашей платформе есть различные
+                                    категории, где в соответствии с вашими
+                                    интересами и компетенциями вы можете
+                                    генерировать идеи и разрешать задачи
+                                </span>
+							</a>
+						</div>
+{#						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-ss-12 margbot30">#}
+{#							<a class="services_item" href="javascript:void(0);" >#}
+{#								<p><b>Free</b> Updates & Support</p>#}
+{#								<span>Hour and great support template. You can always ask a question and we will help you.</span>#}
+{#							</a>#}
+{#						</div>#}
+					</div><!-- //ROW -->
+				</div><!-- //CONTAINER -->
+			</div><!-- //SERVICES -->
+<div class="cleancode_block">
+    <div class="container" data-appear-top-offset="-200" data-animated="fadeInUp">
+        <div id="myTabContent" class="tab-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 center" style="margin-bottom: 50px">
+                        <p class="title ">
+                            Предложить <b> задачу</b>
+                        </p>
+                        <span style="font-size: 20px; line-height: 25px">
+                            Вы команда или организация?<br>
+                            Пытаетесь найти инновационный прорыв или вам просто
+                            нужны свежие идеи?<br>
+                            Опишите вашу проблемы и более
+                                {{ total_users.0 }} человек помогут найти
+                                креативное решение!<br>
                             Общество нашло уже более {{ answers_count }} ответов.
+                        </span>
 
-                     </h5>
-                    </p>
-                    <a target="_blank" href="{% url 'challenge_create_url' %}" class="btn btn-outline-white btn-rounded">
-                        Начать
-                     <i class="fas fa-graduation-cap ml-2"></i>
-                     </a>
+                        <br>
+                        <div class="center">
+                         <a href="{% url 'challenge_create_url' %}"
+                            class="btn" style="margin-top: 20px">
+                             Начать
+                         </a>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-6 center" style="margin-bottom: 50px">
+                        <p class="title">
+                            Найти<br> <b> решение</b>
+                        </p>
+                        <span style="font-size: 20px; line-height: 25px">
+                                Если вы находите решения повсюду,
+                поставьте перед собой задачу изменить мир.<br>
+                               Работайте над решением
+                                    важных проблем для ведущих мировых организаций и команд.
+                                <br>Получайте денежные
+                                        вознаграждения и
+                                           профессиональное признание.<br>
+                            </span>
+                        <br>
+                        <div class="center">
+                        <a href="{% url 'challenges_list_url' %}" class="btn">
+                                Начать
+
+                             </a>
+                        </div>
+
+
+                    </div>
+                    <div class="center">
+                    <a class="btn" style="font-size: 25px"     href="#tab2"
+                        data-toggle="tab">
+                        Как это работает?</a>
+                        </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-5 mx-auto">
-            <div>
-                <div class="bg-white rounded ml-3 p-4 shadow mb-2 text-center">
-                    <h2 class="mb-4 font-weight-bold">
-                        Найти решение
-                    </h2>
-                    <p class="mb-4 text-primary">
-                        <h5> Если вы находите решения повсюду, поставьте перед собой задачу изменить мир. </h5>
-                        <h5> Работайте над решением важных проблем для ведущих мировых организаций и команд.
-                        <br><h5>Получайте денежные вознаграждения и
-                                   профессиональное признание, которого вы заслуживаете.</h5>
-                    </p>
-                    <a target="_blank" href="{% url 'challenges_list_url' %}" class="btn btn-outline-white btn-rounded">
-                        Начать
-                     <i class="fas fa-graduation-cap ml-2"></i>
-                     </a>
-                </div>
-            </div>
-        </div>
 
+        </div>
     </div>
 </div>
+			<!-- CLEAN CODE -->
+
 
 
 </section>
 
-		<section id="projects" class="padbot20">
+
+    <section id="projects" class="padbot20">
 
 <!-- OUR CLIENTS -->
 			{% include 'includes/our_client.html' %}
         </section>
-<section id="single_page">
 
+<section id="how_it_works">
 
-
-
-   <div class="container ">
-
-    <!-- For demo purpose -->
-    <div class="row text-center text-white mb-1">
-        <div class="col-md-8 mx-auto">
-            <h1 class="display-4">Как это работает?</h1>
-
-            <p class="lead mb-0">Build a responsive vertical timeline using Bootstrap 4. </p>
-            <p class="lead">Snippet by<a href="https://bootstrapious.com/snippets" class="text-white">
-                <u>Bootstrapious</u></a></p>
-            </div>
-        </div><!-- End -->
-
-
-        <div class="row" >
-            <div class="col-lg-5 mx-auto">
-                <!-- Timeline -->
-                <ul>
-                    <h3 class="text-center">Как опубликовать задачу?</h3>
-                    <li class="bg-white rounded ml-3 p-4 shadow mb-2">
-                        <div class="timeline-arrow"></div>
-                        <h2 class="h5 mb-0">Title of section 1</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>21 March, 2019</span>
-                        <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                    </li>
-                   <li class="bg-white rounded ml-3 p-4 shadow mb-2">
-                        <div class="timeline-arrow"></div>
-                        <h2 class="h5 mb-0">Title of section 2</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>5 April, 2019</span>
-                        <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper.</p>
-                        <p class="text-small mt-2 font-weight-light">Libero expedita explicabo eius fugiat quia aspernatur autem laudantium error architecto recusandae natus sapiente sit nam eaque, consectetur porro molestiae ipsam! Deleniti.</p>
-                    </li>
-                    <li class="bg-white rounded ml-3 p-4 shadow mb-2">
-                        <div class="timeline-arrow"></div>
-                        <h2 class="h5 mb-0">Title of section 3</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>18 August, 2019</span>
-                        <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                    </li>
-                    <li class="bg-white rounded ml-3 p-4 shadow mb-2">
-                        <div class="timeline-arrow"></div>
-                        <h2 class="h5 mb-0">Title of section 4</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>10 October, 2019</span>
-                        <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                        <p class="text-small mt-2 font-weight-light">Voluptatibus temporibus esse illum eum aspernatur, fugiat suscipit natus! Eum corporis illum nihil officiis tempore. Excepturi illo natus libero sit doloremque, laborum molestias rerum pariatur quam ipsam necessitatibus incidunt, explicabo.</p>
-                    </li>
-                </ul><!-- End -->
-
-            </div>
-            <div class="col-lg-5 mx-auto">
-                <!-- Timeline -->
-                <ul>
-                    <h3 class="text-center">Как решить проблему?</h3>
-                    <li class="bg-white rounded ml-3 p-4 shadow mb-2">
-                        <div class="timeline-arrow"></div>
-                        <h2 class="h5 mb-0">Title of section 1</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>21 March, 2019</span>
-                        <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                    </li>
-                   <li class="bg-white rounded ml-3 p-4 shadow mb-2">
-                        <div class="timeline-arrow"></div>
-                        <h2 class="h5 mb-0">Title of section 2</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>5 April, 2019</span>
-                        <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper.</p>
-                        <p class="text-small mt-2 font-weight-light">Libero expedita explicabo eius fugiat quia aspernatur autem laudantium error architecto recusandae natus sapiente sit nam eaque, consectetur porro molestiae ipsam! Deleniti.</p>
-                    </li>
-                    <li class="bg-white rounded ml-3 p-4 shadow mb-2">
-                        <div class="timeline-arrow"></div>
-                        <h2 class="h5 mb-0">Title of section 3</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>18 August, 2019</span>
-                        <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                    </li>
-                    <li class="bg-white rounded ml-3 p-4 shadow mb-2">
-                        <div class="timeline-arrow"></div>
-                        <h2 class="h5 mb-0">Title of section 4</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>10 October, 2019</span>
-                        <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                        <p class="text-small mt-2 font-weight-light">Voluptatibus temporibus esse illum eum aspernatur, fugiat suscipit natus! Eum corporis illum nihil officiis tempore. Excepturi illo natus libero sit doloremque, laborum molestias rerum pariatur quam ipsam necessitatibus incidunt, explicabo.</p>
-                    </li>
-                </ul><!-- End -->
-
-            </div>
-        </div>
-    </div>
+			<!-- CONTAINER -->
 
 </section>
+{##}
+{##}
+{#<section id="single_page">#}
+{#<div class="container center">#}
+{#				<h2><b>Как это</b> работает</h2>#}
+{#				<!-- ROW -->#}
+{#				<div class="row" data-appear-top-offset="-200" data-animated="fadeInUp">#}
+{#                </div>#}
+{#            </div>#}
+{#  <div class="how_it_works_block">#}
+{#	<!-- CONTAINER -->#}
+{#      <div class="container" style="padding-bottom: 40px">#}
+{#             <div class="row">#}
+{#                 <div class="col-md-12 center" style="padding-bottom: 10px">#}
+{#                     <a class="btn" style="font-size: 30px" href="#tab1"#}
+{#                        data-toggle="tab">#}
+{#                         Как предложить задачу?</a>#}
+{##}
+{#                     <a class="btn" style="font-size: 30px"     href="#tab2"#}
+{#                        data-toggle="tab">#}
+{#                        Как найти решение?</a>#}
+{#                 </div>#}
+{#             </div>#}
+{#        </div>#}
+{#	<div class="container" data-appear-top-offset="-200" data-animated="fadeInUp">#}
+{#		<!-- CASTOM TAB -->#}
+{##}
+{#		<div id="myTabContent" class="tab-content">#}
+{##}
+{#			<div class="tab-pane fade in active clearfix left" id="tab1">#}
+{#				<p class="title">#}
+{#                             <b>Как предложить</b> задачу? <br>#}
+{#                </p>#}
+{#				<span style="font-size: 20px; line-height: 25px">#}
+{#                После прохождения регистрации Вам будет предложено#}
+{#                    опубликовать информацию о проблеме. <br>#}
+{#                    В качестве темы может быть как#}
+{#                    социально-значимый вопрос (от пользователей), так и#}
+{#                    проблемы команд или предприятий.<br>#}
+{#                    Вы можете отправить задачу с открытым голосованием за#}
+{#                    предложенные идеи (голосуют сами пользователи), либо#}
+{#                    определить подходящие варианты самостоятельно.#}
+{#                    <br>#}
+{#                    В качестве результата вы можете выбрать несколько#}
+{#                    категорий - устный ответ, исходный код, экскиз и т.п.#}
+{#                    После оформления задачи с Вами свяжется наш координатор#}
+{#                    и ваша проблема будет опубликована! <br>#}
+{#                    Спасибо, что готовы принять участия в проекте, для нас#}
+{#                    это очень важно!#}
+{#                </span>#}
+{#			</div>#}
+{#			<div class="tab-pane fade clearfix left" id="tab2">#}
+{#                <p class="title"><b>Как найти</b> решение </p>#}
+{#				<span style="font-size: 20px; line-height: 25px">#}
+{#                    Для возможности создания и комментирования предложений,#}
+{#                    голосования за ответы пользователей необходимо пройти#}
+{#                    регистрацию.#}
+{#                    Каждая проблема имеет статус выполнения: <br>#}
+{#                    - сбор предложений и идей <br>#}
+{#                    - обсуждение предложений <br>#}
+{#                    - голосование <br>#}
+{#                    - реализация и внедрение идей <br>#}
+{#                    В зависимости от выбранного заказчиком типа голосования#}
+{#                    определяется и награждается победитель.<br>#}
+{##}
+{##}
+{##}
+{#                </span>#}
+{##}
+{##}
+{##}
+{##}
+{#                     </div>#}
+{##}
+{#		</div>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#	</div><!-- //CONTAINER -->#}
+{#</div><!-- //CLEAN CODE -->#}
+{##}
+{#</section>#}
+    <section>
+    <div class="container center" style="padding-bottom: 60px; padding-top:
+    40px;">
+        <div class="row">
+            <h2>
+                Наш проект совсем молодой. Мы очень признательны Вам за
+                активность и любую обратную связь!
+            </h2>
+        </div>
+    </div>
+    </section>
 
 
 

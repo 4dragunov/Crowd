@@ -1,0 +1,46 @@
+{% if user.is_authenticated %} 
+<div class="card my-4">
+<form
+    action="{% url 'add_comment' challenge.slug answer.pk %}"
+    method="post">
+    {% csrf_token %}
+    <h5 class="card-header">Добавить комментарий:</h5>
+    <div class="card-body">
+    <form>
+        <div class="form-group">
+        {{ form.text }}
+        </div>
+        <button type="submit" class="btn">Отправить</button>
+    </form>
+    </div>
+</form>
+</div>
+{% endif %}
+<h3 style="padding-top: 40px">Последние комментарии:</h3>
+<!-- Комментарии -->
+{% for item in items %}
+<div class="media mb-2">
+<div class="media-body">
+    <h5 class="mt-0">
+{#    <a#}
+{#        href="{% url 'profile' item.author.username %}"#}
+{#        name="comment_{{ item.id }}"#}
+{#        >#}
+        {{ item.author.username }}
+
+{#    </a>#}
+    </h5>
+    {{ item.text }}
+    <br>
+    {% if item.author == request.user %}
+
+    <a  href="
+{% url 'del_comment' challenge.slug answer.pk item.pk %}">
+       Удалить
+            комментарий</a>
+    {% endif %}
+    <hr>
+</div>
+</div>
+
+{% endfor %}

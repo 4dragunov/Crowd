@@ -4,6 +4,8 @@ from django.db.models import Avg, Max, Min, Sum
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.db.models import Count
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+
 
 User = get_user_model()
 
@@ -21,3 +23,8 @@ def redirect_crowd(request):
     return render(request, 'main.html', context={'data': data, 'challenge_count' : challenge_count,
                                                  'answers_count' : answers_count, 'prize_amount':prize_amount,
                                                  'total_users': total_users, 'challenge_users' :challenge_users})
+
+
+def about_us(request):
+    data = 123
+    return render(request, "about.html")
