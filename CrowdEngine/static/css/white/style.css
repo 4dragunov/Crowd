@@ -1733,7 +1733,7 @@ input[type="color"]:focus {
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 	.parallax, .cleancode_block, #team, .top_slider .slide1, .top_slider .slide2, .top_slider .slide3 {background-attachment:scroll !important; background-position:0 0;}
-	.top_slider .slide1, .top_slider .slide2, .top_slider .slide3 {background-size:cover !important;}
+	.top_slider .flex_caption1, .top_slider .slide2, .top_slider .slide3 {background-size:cover !important;}
 
 }
 

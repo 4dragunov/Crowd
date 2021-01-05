@@ -14,32 +14,55 @@
                                 Мы объединяем людей с новаторским мышлением,
                                 которые каждый день решают актуальные
                                 проблемы и изменяют мир к лучшему.
-                                <br><b> Вы с нами?</b>
+                                <br> Вы с нами?
                             </p>
 						</div>
-						<a class="slide_btn FromRight" href="javascript:void
+						<a href="{% url 'about' %}"  class="slide_btn
+						FromRight"
+                           href="javascript:void
 						(0);">О нас</a>
 					<li class="slide2">
 						<div class="flex_caption1">
-							<p class="title1 captionDelay6 FromLeft">Responsive</p>
-							<p class="title2 captionDelay4 FromLeft">Design</p>
-							<p class="title3 captionDelay2 FromLeft">Theme</p>
-							<p class="title4 captionDelay7 FromLeft">The template is suitable for any company and the direction that appreciates style, purity and quality of the web site.</p>
+							<p class="title1 captionDelay6 FromLeft">Crowd</p>
+							<p class="title2 captionDelay4 FromLeft">Opinion</p>
+{#							<p class="title3 captionDelay2 FromLeft">Theme</p>#}
+							<p class="title4 captionDelay7 FromLeft">
+                                Crowd opinion – это краудсорсинг-платформа, на которой организации могут получить новейшие идеи для своих проектов, размещая задания, а пользователи могут предлагать разнообразные решения, находя единомышленников и получая призы!
+                            </p>
 						</div>
-						<a class="slide_btn FromRight" href="javascript:void(0);" >Read More</a>
+						<a href="{% url 'about' %}"  class="slide_btn
+						FromRight"
+                           href="javascript:void
+						(0);">О нас</a>
 					</li>
 					<li class="slide3">
 						<div class="flex_caption1">
-							<p class="title1 captionDelay1 FromBottom">Amazing</p>
-							<p class="title2 captionDelay2 FromBottom">Video</p>
-							<p class="title3 captionDelay3 FromBottom">Background</p>
-							<p class="title4 captionDelay5 FromBottom">The template is suitable for any company and the direction that appreciates style, purity and quality of the web site.</p>
-						</div>
-						<a class="slide_btn FromRight" href="javascript:void(0);" >Read More</a>
+{#							<p class="title1 captionDelay1 FromBottom">Amazing</p>#}
+{#							<p class="title2 captionDelay2 FromBottom">Video</p>#}
+{#							<p class="title3 captionDelay3 FromBottom">Background</p>#}
+							<p class="title4 captionDelay5 FromBottom"
+{#                               style="font-size: 20px; line-height: 20px"#}
+                            >
 
-						<!-- VIDEO BACKGROUND -->
-						<a id="P2" class="player" data-property="{videoURL:'tDvBwPzJ7dY',containment:'.top_slider .slide3',autoPlay:true, mute:true, startAt:0, opacity:1}" ></a>
-						<!-- //VIDEO BACKGROUND -->
+<b>Краудсорсинг для компаний </b>– это форма сотрудничества с потребителями,
+        при которой индивидуальный и коллективный потребительский потенциал используется для достижения стратегических маркетинговых целей и получения свежих инициатив.
+<br>
+                                <br>
+
+                                <b>Краудсориснг для инноваторов </b> – это возможность воплотить свои идеи в
+    жизнь,
+              разрешить важные социальные и бизнес проблемы, развить свои умения и навыки и получить за это вознаграждение
+
+                            </p>
+						</div>
+						<<a href="{% url 'about' %}"  class="slide_btn
+						FromRight"
+                           href="javascript:void
+						(0);">О нас</a>
+
+{#						<!-- VIDEO BACKGROUND -->#}
+{#						<a id="P2" class="player" data-property="{videoURL:'tDvBwPzJ7dY',containment:'.top_slider .slide3',autoPlay:true, mute:true, startAt:0, opacity:1}" ></a>#}
+{#						<!-- //VIDEO BACKGROUND -->#}
 					</li>
 				</ul>
 			</div>
@@ -65,7 +88,7 @@
 						col-ss-12 margbot30">
 							<a class="services_item" href="javascript:void(0);" >
 								<p><b>Инновационная </b> платформа</p>
-								<span>Мы предлагаем двустороннюю платформу, где пользователи могут создавать задачи, которые необходимо разрешить, а инноваторы могут предлагать свои идеи и получать призы!</span>
+								<span>Мы предлагаем двустороннюю платформу, где пользователи могут создавать задачи, которые необходимо разрешить, а инноваторы могут предлагать свои идеи и получать призы</span>
 							</a>
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6
@@ -81,10 +104,10 @@
 							<a class="services_item" href="javascript:void(0);" >
 								<p>Многообразие<b> направлений</b>
                                 </p>
-								<span>На нашей платформе есть различные
+								<span>На CrowdOpinion есть различные
                                     категории, где в соответствии с вашими
                                     интересами и компетенциями вы можете
-                                    генерировать идеи и разрешать задачи
+                                    генерировать идеи и разрешать задачи.
                                 </span>
 							</a>
 						</div>
@@ -129,7 +152,7 @@
 
                     <div class="col-md-6 center" style="margin-bottom: 50px">
                         <p class="title">
-                            Найти<br> <b> решение</b>
+                            Найти <b> решение</b>
                         </p>
                         <span style="font-size: 20px; line-height: 25px">
                                 Если вы находите решения повсюду,
@@ -151,10 +174,11 @@
 
                     </div>
                     <div class="center">
-                    <a class="btn" style="font-size: 25px"     href="#tab2"
-                        data-toggle="tab">
+                    <a href="{% url 'about' %}" class="btn"
+                       style="font-size: 25px"
+                       >
                         Как это работает?</a>
-                        </div>
+                    </div>
                 </div>
             </div>
 

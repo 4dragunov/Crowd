@@ -68,12 +68,13 @@ def answers_list(request, slug):
         page_number)  # получить записи с нужным смещением
 
 
-    return render(request, 'challenge/answers_list.html', context={'answers': answers,
-                                                                   'top_categories':top_categories,
-                                                                   'top_challenges':top_challenges,
-                                                                   'challenge':challenge,
-                                                                   'page':page,
-                                                                   'paginator':paginator})
+    return render(request, 'challenge/answers_list.html',
+                  context={'answers': answers,
+                           'top_categories':top_categories,
+                           'top_challenges':top_challenges,
+                           'challenge':challenge,
+                           'page':page,
+                           'paginator':paginator})
 def add_comment(request, slug, pk):
     answer = get_object_or_404(Answer, pk=pk)
     form = CommentForm(request.POST or None)

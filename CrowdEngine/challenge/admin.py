@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Challenge, Category, Answer, AnswerLike
+from .models import Challenge, Category, Answer, AnswerLike, Comment
 
 
 
@@ -30,5 +30,9 @@ class AnswerLikeAdmin(admin.ModelAdmin):
 # class LikeAnswerAdmin(admin.ModelAdmin):
 #     list_display = ('answer', 'liked_by', 'like', 'created')
 
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('answer', 'author', 'text')
 
 admin.site.register(Challenge, ChallengeAdmin)
+
